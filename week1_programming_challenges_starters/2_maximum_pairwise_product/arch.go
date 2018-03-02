@@ -57,6 +57,7 @@ func MaxPairwiseProductFast() int {
 
 func main() {
 	//	fmt.Printf("%v naive\n", MaxPairwiseProductNaive())
+	fmt.Scanf(os.Stdin)
 	fmt.Printf("%v fast\n", MaxPairwiseProductFast())
 
 }
