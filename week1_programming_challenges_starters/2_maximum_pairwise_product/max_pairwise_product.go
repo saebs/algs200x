@@ -1,23 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"math"
+	"os"
+	"strconv"
+	"strings"
 )
-
-/*
-# python implementation of naive
-
-result = 0
-
-for i in range(0, n):
-    for j in range(i+1, n):
-        if a[i]*a[j] > result:
-            result = a[i]*a[j]
-
-print(result)
-
-*/
 
 // 2.1 Naive Algorithm
 func MaxPairwiseProductNaive(dataset []int) int {
@@ -54,19 +44,38 @@ func MaxPairwiseProductFast(dataset []int) int {
 			index2 = i
 		}
 	}
-	fmt.Println(index1, index2)
+	//debuggin fmt.Println(index1, index2)
 	return dataset[index1] * dataset[index2]
+	// write data set
+	//func writedata(
 
 }
-func main() {
-	//	 some control shit here or constraint
-	var n int
-	var m int
-	fmt.Printf("n = ")
-	fmt.Scanf("%d", &n)
-	fmt.Printf("m = ")
-	fmt.Scanf("%d", &m)
-	// stress test
-	StressTest(n, m)
 
+// reads first line and second line of input the produces data set
+func getDataset(n int) []int {
+	nRawSeq := bufio.NewReader(os.Stdin) // next line input: A1,...,An
+	elems, _, _ := nRawSeq.ReadLine()
+	rawElems := strings.Split(string(elems), " ") //
+	cleanElems := make([]int, n)
+
+	for i, num := range rawElems {
+		cleanElems[i], _ = strconv.Atoi(num)
+	}
+	return cleanElems
+}
+
+func main() {
+	//  Constraints 2<= n <= 2*10exp5 and A1,...An <= 2*10exp5
+	var n int
+	fmt.Scanf("%d", &n) // first line input: n
+	sequence := getDataset(n)
+	fmt.Println(MaxPairwiseProductFast(sequence))
+
+	// STRESS TEST
+	/*
+		var int m
+		fmt.Scanf("%d", &m
+		StressTest(n, m)
+
+	*/
 }
