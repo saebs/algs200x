@@ -1,5 +1,5 @@
 import random
-from gcd import *
+from lcm import *
 
 def stress_test():
     """ testing to maximum constraint """
@@ -7,8 +7,8 @@ def stress_test():
     while True:
         a = random.randint(1,200000)
         b = random.randint(1,200000)
-        result1 = gcd_naive(a, b)
-        result2 = gcd_euclid(a, b)
+        result1 = lcm_naive(a, b)
+        result2 = lcm_fast(a, b)
         if result1 == result2:
             print("OK")
         else:

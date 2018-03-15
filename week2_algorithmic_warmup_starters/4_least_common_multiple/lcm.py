@@ -8,8 +8,18 @@ def lcm_naive(a, b):
 
     return a*b
 
+
+def lcm_fast(a, b):
+    """ re_uses euclid"""    
+    def gcd(a, b):
+        if b == 0:
+            return a
+        a = a%b
+        return gcd(b, a)
+    return a//gcd(a,b) * b
+
 if __name__ == '__main__':
     input = sys.stdin.read()
     a, b = map(int, input.split())
-    print(lcm_naive(a, b))
+    print(lcm_fast(a, b))
 
