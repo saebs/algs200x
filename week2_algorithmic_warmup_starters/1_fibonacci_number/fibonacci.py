@@ -12,7 +12,9 @@ def calc_fib(n):
 def calc_fib_fast(n):
     """ uses one line formula derived by induction"""
     part1 = 1/2 + (math.sqrt(5)/2) 
+    print(part1)
     part2 = 1/2 - (math.sqrt(5)/2)
+    print(part2)
     fn = 1/math.sqrt(5)*(part1**n - part2**n)
     return int(fn)
 
