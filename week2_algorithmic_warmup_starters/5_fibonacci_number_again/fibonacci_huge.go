@@ -35,6 +35,7 @@ func getFibonacciHugeFast(n, m int) int {
 		// Pissano period
 		if previous%m == 0 && current%m == 1 {
 			rem = n % (i + 1) // by length of period i+1
+			break
 		}
 	}
 	return fibs[rem] % m

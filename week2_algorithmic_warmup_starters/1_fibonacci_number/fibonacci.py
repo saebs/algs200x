@@ -18,6 +18,16 @@ def calc_fib_fast(n):
     fn = 1/math.sqrt(5)*(part1**n - part2**n)
     return int(fn)
 
+def fib_binets(n):
+    """Implements Binets Formula"""
+    if n <= 1:
+        return n
+
+    phi = (1 + math.sqrt(5))*0.5
+    return int((phi**n/math.sqrt(5))+ 0.5)
+
+
+
 def stress_test():
     """ testing to maximum constraint """
     while True:
@@ -37,6 +47,6 @@ if n < 0 or n > 45:
     #stress_test()
     exit()
 """
-print(calc_fib_fast(n)%10)
+print(fib_binets(n))
 
 

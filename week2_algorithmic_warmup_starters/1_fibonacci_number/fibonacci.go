@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"math/big"
 )
 
 func calcFibFast(n int) int {
@@ -15,8 +16,19 @@ func calcFibFast(n int) int {
 	return int(fn)
 }
 
+// Binets arithmetic formula
+func fibBinets(n big.Int) big.Int {
+	if n <= 1 {
+		return n
+	}
+	//phi := (1 + big.Sqrt(5))* 0.5
+	// TO DO
+	return n.Exp(math.Sqrt(5) + 0.5)
+
+}
+
 func main() {
-	var n int
+	var n big.Int
 	fmt.Scanf("%d", &n)
-	fmt.Printf("%d", calcFibFast(n))
+	fmt.Printf("%d", fibBinets(n))
 }
