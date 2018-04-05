@@ -1,0 +1,77 @@
+package main
+
+import (
+	"fmt"
+	// "math"
+	"math/big"
+)
+
+//Fibonacci Naive
+func fibNaive(n int) *big.Int {
+	if n <= 1 {
+		return big.NewInt(int64(n))
+	}
+	previous := big.NewInt(0) // also the first fibonacci number
+	current := big.NewInt(1)
+
+	for i := 0; i < n-1; i++ {
+		current, previous = previous, current
+		current.Add(previous, current)
+	}
+	return current
+}
+
+// Binets arithmetic formula
+func fibMatrixExp(n int) int {
+	F := [][]int{}
+	// first twoo rows
+	row1 := []int{1, 1}
+	row2 := []int{1, 0}
+	// appending each row to 2d slice
+	F = append(F, row1)
+	F = append(F, row2)
+	if n <= 1 {
+		return n
+	}
+	power(F, n-1)
+	return F[0][0]
+}
+
+// Helper function calcs F[][] to power n, enters value in F[][]
+
+func power(F [][]int, n int) {
+	M := [][]int{}
+	// first two rows
+	row1 := []int{1, 1}
+	row2 := []int{1, 0}
+	// append each row to the 2d slice
+	M = append(M, row1)
+	M = append(M, row2)
+	// multiply matrxi by itself n-1 times
+	for i := 2; i <= n; i++ {
+		multiply(F, M)
+	}
+	// fmt.Println(F)
+}
+
+// 2x2 matrix multiplier
+func multiply(F, Q [][]int) {
+	a := F[0][0]*Q[0][0] + F[0][1]*Q[1][0]
+	b := F[0][0]*Q[0][1] + F[0][1]*Q[1][1]
+	c := F[1][0]*Q[0][0] + F[1][1]*Q[1][0]
+	d := F[1][0]*Q[0][1] + F[1][1]*Q[1][1]
+	F[0][0] = a
+	F[0][1] = b
+	F[1][0] = c
+	F[1][1] = d
+}
+
+func main() {
+	var n int
+	fmt.Scanf("%d", &n)
+	if 0 <= n && n <= 100 {
+		fmt.Printf("%d\n", fibNaive(n))
+		fmt.Printf("%d\n", fibMatrixExp(n))
+	}
+
+}
