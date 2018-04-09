@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	// "math"
+	"fmt"
 	"math/big"
 )
 
@@ -87,10 +87,11 @@ func (fib *fibonacci) multiply() {
 }
 
 func main() {
+	// stressTest()
 	var n int
 	fmt.Scanf("%d", &n)
 	fibonacciFast := newFibonacci(n)
-	if 0 <= n && n <= 100 {
+	if 0 <= n && n <= 45 {
 		fmt.Printf("%d\n", fibNaive(n))
 		fmt.Printf("%d\n", fibonacciFast.nth())
 	}

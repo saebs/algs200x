@@ -56,7 +56,7 @@ func newFibonacci(n, m int) fibonacci {
 }
 
 // Matrix exponentiation method
-func (fib *fibonacci) fnModm() *big.Int {
+func (fib *fibonacci) fiModm() *big.Int {
 	var fibmod big.Int
 	if fib.n <= 1 {
 		return big.NewInt(int64(fib.n))
@@ -127,7 +127,7 @@ func main() {
 	// Contraints 1 <= n <= 10^18 , 2 <= m <= 10^5
 	if 1 <= n && n <= 1000000000000000000 && 2 <= m && m <= 1000000 {
 		// fmt.Printf("%d\n", fibNaive(n))
-		fmt.Printf("%d\n", fibonacciFast.fnModm())
+		fmt.Printf("%d\n", fibonacciFast.fiModm())
 	}
 
 }
