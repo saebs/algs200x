@@ -11,7 +11,7 @@ fn fib(n: i64) -> i64 {
     }
 }
 
-/// Optimized by using Vector / Array
+/// Optimized by Memoization Technique 
 fn fib_optimised(n: usize) -> usize {
 	let mut f = Vec::with_capacity(n);
 	f.push(0);
