@@ -1,2 +1,6 @@
-0.00user 0.01system 0:02.18elapsed 0%CPU (0avgtext+0avgdata 15020maxresident)k
-0inputs+0outputs (0major+1389minor)pagefaults 0swaps
+program: cargo run --bin week1 aplusb aplus_test_case.txt 
+ user: 0.00s
+ system: 0.01s
+ Elapsed: 0:02.09s
+ Memory: 14920*1000 kb
+
