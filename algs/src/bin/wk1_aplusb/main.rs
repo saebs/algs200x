@@ -17,3 +17,14 @@ fn main() -> std::io::Result<()> {
     Ok(())
 
 }
+
+#[cfg(test)]
+mod aplusb_tests {
+    use super::*;
+    #[test]
+    fn ey() {
+        assert_eq!(1, 1);
+    }
+
+
+}
