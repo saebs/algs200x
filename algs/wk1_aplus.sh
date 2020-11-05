@@ -1,11 +1,14 @@
 #!/bin/bash
-/usr/bin/time -f'program: %C \n user: %Us\n system: %Ss\n Elapsed: %Es\n Memory: %Mkb\n' -o perfomance_tests_logs/aplus.log cargo run --bin  week1 aplusb aplus_test_case.txt 
+week=week1
+appName=week1_aplusb
+testData=test_case.txt
 timeLimit=1
 memLimit=524288
-# parse determine if pas or fail speed test
-echo Time Limit: 1s
-echo Memory Limit 512mb
-echo -----------------
-echo Bechmarks
-echo _________
-cat perfomance_tests_logs/aplus.log
+/usr/bin/time -f'\nUser\tSystem\tReal\tMemory\n%Us\t%Ss\t%es\t%Mkb\n' -o "perfomance_tests_logs//$appName.log" cargo run --bin $appName $testData
+echo
+echo CONSTRAINTS
+echo Time Limit: $timeLimit s
+echo Memory Limit $memLimit kb 
+echo 
+echo BENCHMARKS
+cat perfomance_tests_logs/$appName.log

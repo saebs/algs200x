@@ -1,6 +1,5 @@
 program: cargo run --bin week1 aplusb aplus_test_case.txt 
- user: 0.00s
- system: 0.01s
- Elapsed: 0:02.09s
- Memory: 14920*1000 kb
+
+User	System	Real	Memory
+0.00s	0.01s	2.47s	14832kb
 
