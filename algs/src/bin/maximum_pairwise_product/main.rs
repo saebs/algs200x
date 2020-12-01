@@ -32,7 +32,7 @@ Constraints. 2  n  2  105; 0  a1; : : : ;an  2  105.
 fn main() -> std::io::Result<()> {
     let mut buff = String::new();
     // inputs
-    ::std::io::stdin().read_line(&mut buff);
+    ::std::io::stdin().read_line(&mut buff)?;
     let mut words = buff.split_whitespace();
 
     // collect 
