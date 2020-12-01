@@ -9,7 +9,7 @@ rm *.log
 cd ..
 
 # /usr/bin/time -f'\nUser\tSystem\tReal\tMemory\n%Us\t%Ss\t%es\t%Mkb\n' -o "perfomance_tests_logs//$appName.log" cargo run --bin $appName $testData
-/usr/bin/time -f'\nUser\tSystem\tMemory\n%Us\t%Ss\t%Mkb\n' -o "perfomance_tests_logs//$appName.log" cargo run --bin $appName $testData
+/usr/bin/time -f'\nUser(s)\tSystem(s)\tMemory(kb)\n%U\t%S\t\t%M\n' -o "perfomance_tests_logs//$appName.log" cargo run --bin $appName $testData
 echo
 echo CONSTRAINTS
 echo Time Limit: $timeLimit s
