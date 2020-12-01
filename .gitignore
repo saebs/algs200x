@@ -2,4 +2,5 @@
 *.vscode*
 aplusb
 **/target/**
-*.log
+grader_report/*
+
