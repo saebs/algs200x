@@ -7,7 +7,7 @@ memLimit=524288
 cd report 
 rm *.txt
 cd ..
-# strip rust extension and parent folder
+# strip rust extension and parent folder 'src/'
 app=${solutionSourceCode%.rs}
 app=${app:4}
 
@@ -21,4 +21,9 @@ echo Time Limit: $timeLimit s
 echo Memory Limit $memLimit kb 
 echo 
 echo BENCHMARKS
+if [ `expr $timeLimit \>= 1` ]; then
+    echo "Pass: Running Time within $timeLimit s"
+else
+    echo "Fail: Running Time exceeds time limit constraint!!"
+fi
 cat report/$app.txt
