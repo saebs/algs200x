@@ -1,7 +1,5 @@
 .vscode/*
 *.vscode*
-aplusb
-**/target/**
-**grader_report/**
-**bin/**
+algs/report/*
+algs/bin/**
 
