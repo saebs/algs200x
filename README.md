@@ -9,8 +9,8 @@ This Project is for self learning purposes and tries to implement a custom bench
 ## Instructions
 
 1. Running Grader 
-`code` $ cd algs
-`code` $ ./run_grader 
+$ ./grader.sh src/aplusb.rs
+![Image of Run Grader](https://octodex.github.com/images/yaktocat.png)
   
 2. Running Test suits
 use rust tooling cargo.
