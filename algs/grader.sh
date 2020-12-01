@@ -1,20 +1,23 @@
 #!/bin/bash
-echo 1. aplusb
-echo Enter Name of Programming Challenge
-read -p 'solution: ' appName
-testData=test_case.txt
+solutionSourceCode="$1"
+echo $solutionSourceCode
 timeLimit=1
 memLimit=524288
 cd grader_report 
 rm *.txt
 cd ..
-rustc src/$appName.rs -o bin/$appName 
-/usr/bin/time -f'\nUser(s)\tSystem(s)\tMemory(kb)\n%U\t%S\t\t%M\n' -o "grader_report//$appName.txt"  bin/$appName  
+# strip rust extension and parent folder
+app=${solutionSourceCode%.rs}
+app=${app:4}
+
+# Compile Solution
+rustc $solutionSourceCode -o bin/$app 
+# Measure Runtime 
+/usr/bin/time -f'\nUser(s)\tSystem(s)\tMemory(kb)\n%U\t%S\t\t%M\n' -o "grader_report//$app.txt"  bin/$app  
 echo
 echo CONSTRAINTS
 echo Time Limit: $timeLimit s
 echo Memory Limit $memLimit kb 
 echo 
 echo BENCHMARKS
-cat grader_report/$appName.txt
-# cat /dev/stdin | cut -d' ' -f 2,3 | sort
+cat grader_report/$app.txt
