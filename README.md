@@ -8,12 +8,10 @@ This Project is for self learning purposes and tries to implement a custom bench
 
 ## Instructions
 
-1. Running Grader 
+## 1. Running Grader 
 $ ./grader.sh src/aplusb.rs
-![Image of Run Grader](https://octodex.github.com/images/yaktocat.png)
+![](https://octodex.github.com/images/minion.png)
   
-2. Running Test suits
-use rust tooling cargo.
-
-`code` $ cargo test <test modules>
+## 2. Running Test suits
+..
   
