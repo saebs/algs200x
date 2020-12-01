@@ -2,5 +2,7 @@
 *.vscode*
 aplusb
 **/target/**
-grader_report/*.txt
+**/grader_report/*.txt
+**bin/**
 
+algs/grader_report/aplusb.txt
