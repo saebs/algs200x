@@ -1,20 +1,45 @@
-//! supposed to run various requirements tests
-// Runtime
-// Memory used
-// Algorithm correctness
-use std::fmt::*;
+//! Self Grading Tool 
 
-// compile with optimisations
-// rustc -O grader.rs
-fn main() {
+// MEASURE and enforce Constraints
+// Runtime
+// Memory used by process
+
+// TEST
+// Algorithm correctness
+
+
+use std::process;
+use std::process::Command;
+use std::env;
+use std::time::Instant;
+use std::fs;
+
+
+
+fn main() -> std::io::Result<()> {
+
+    let args: Vec<String> = env::args().skip(1).collect();
     //
-    use std::time::Instant;
+    println!("program to grade: {}", &args[0]);
+    let prog = &args[0].clone();
+    let prog = prog.as_str();
+    // let prog = fs::canonicalize(prog)?;
+    let app = Command::new("sh")
+            .current_dir("build.sh")
+            .arg(prog)
+            .spawn()
+            .expect("mm kulokuthancileyo");
     let now = Instant::now();
     
-    for i in 0..1000000 {
-        println!("foo");
-    }
+    app.stdout;
+    // somwhere along the line it should read program binary to run tests on
     
     let elapsed = now.elapsed();
+    // or save to file
     println!("Elapsed: {:.2?}", elapsed);
+    // or save to file
+    println!("my pid is {}", process::id());
+
+    Ok(())
+
 }

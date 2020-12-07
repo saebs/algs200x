@@ -2,8 +2,9 @@
 #TODO SOME error handling when you have time
 solutionSourceCode="$1"
 echo $solutionSourceCode
-# strip rust extension and parent folder
+# trim rust extension
 app=${solutionSourceCode%.rs}
+# trim parent folder characters 'src/'
 app=${app:4}
 
 # Compile Solution
