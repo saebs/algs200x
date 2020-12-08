@@ -12,7 +12,7 @@ use std::process;
 use std::process::Command;
 use std::env;
 use std::time::Instant;
-use std::fs;
+// use std::fs;
 
 
 
@@ -22,19 +22,17 @@ fn main() -> std::io::Result<()> {
     //
     println!("program to grade: {}", &args[0]);
     let prog = &args[0].clone();
-    let prog = prog.as_str();
+    let _prog = prog.as_str();
     // let prog = fs::canonicalize(prog)?;
-    let app = Command::new("sh")
-            .current_dir("build.sh")
-            .arg(prog)
-            .spawn()
-            .expect("mm kulokuthancileyo");
     let now = Instant::now();
-    
-    app.stdout;
-    // somwhere along the line it should read program binary to run tests on
-    
+    let app = Command::new("date")
+            .arg("-u")
+            .spawn()
+            .expect("mm kulokuthancileyo")
+            .wait();
     let elapsed = now.elapsed();
+
+    // somwhere along the line it should read program binary to run tests on
     // or save to file
     println!("Elapsed: {:.2?}", elapsed);
     // or save to file
