@@ -22,6 +22,10 @@
 // 1 1 1.5 5 2 5 3
 // Memory limit. 512 Mb.
 
+fn sum_of_two_digits(a: i64, b: i64) -> i64 {
+    a + b 
+}
+
 fn main() -> std::io::Result<()> {
     let mut buff = String::new();
     ::std::io::stdin().read_line(&mut buff)?;
@@ -29,7 +33,9 @@ fn main() -> std::io::Result<()> {
 
     let a: i64 = words.next().unwrap().parse().unwrap();
     let b: i64 = words.next().unwrap().parse().unwrap();
+    // enforce contraints
+    assert!(a >= 0 && a <= 9 && b >= 0 && b <= 9);
 
-    println!("{}", a + b);
+    println!("{}", sum_of_two_digits(a, b));
     Ok(())
 }

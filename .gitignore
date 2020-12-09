@@ -1,3 +1,10 @@
 .vscode/*
 *.vscode*
+<<<<<<< HEAD
+=======
+algs/report/*
+algs/bin/**
+bin/*
+grader
+>>>>>>> f618f328b07f84f61d79d18854d383f15e585713
 
