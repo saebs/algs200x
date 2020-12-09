@@ -9,7 +9,7 @@
 
 
 use std::process;
-use std::process::{Command,Stdio};
+use std::process::{Command};
 use std::env;
 use std::time::Instant;
 // use std::fs;
@@ -21,25 +21,32 @@ fn main() -> std::io::Result<()> {
     let args: Vec<String> = env::args().skip(1).collect();
     //
     println!("program to grade: {}", &args[0]);
-    let prog = &args[0].clone();
-    let _prog = prog.as_str();
-    // let prog = fs::canonicalize(prog)?;
+    let solution = &args[0][..];
     let now = Instant::now();
-    let procid = format!("{}",process::id());
-    let _piper =  " | tail -n 1".to_owned();
-    let app = Command::new("pmap")
-        .arg(&procid)
-        .stdin(Stdio::piped())
-        .spawn()
-        .expect("mm kulokuthancileyo")
-        .wait();
+    // let _piper =  " | tail -n 1".to_owned();
+    // build solution
+    let mut build = Command::new("./build.sh").arg(&solution).spawn();
+                // remember to kill
+    if let Ok(mut out) = build {
+        out.wait();
+        println!("{:?}", out.stdout);
+    }
+    // run solution
+    // measure solution
+    // let mut app = Command::new("pmap").arg();
+    // if let Ok(mut child) = app.arg(spawn() {
+    //     println!("ehe {}", child.id());
+    // } else {
+    //     println!("mmm asazi");
+    // }
     let elapsed = now.elapsed();
 
     // somewhere along the line it should read program binary to run tests on
     // or save to file
     println!("Elapsed: {:.2?}", elapsed);
     // or save to file
-    println!("my pid is {}", process::id());
+    println!("my Parent pid is {}", process::id());
+    // println!("my Child pid is {}", procid);
     // invoke pmap on process is and print
     // pmap process::id() | tail -n 1
 
