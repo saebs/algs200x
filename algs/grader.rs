@@ -53,8 +53,6 @@ fn main() -> std::io::Result<()> {
 //
 //****************************************************
 
-    // run solution
-    // run pmap on solution, but how mmm
     let proc_id = process::id().to_string();
     // pmap ID ...
     let pmap = Command::new("pmap")
