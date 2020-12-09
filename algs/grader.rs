@@ -97,7 +97,7 @@ fn main() -> std::io::Result<()> {
         Err(_) => (),
     }
 
-    // process can now chill
+    // until solution process done 
     solution_child.wait();
     
     // TODO or save to file
