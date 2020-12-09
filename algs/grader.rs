@@ -14,23 +14,20 @@ use std::env;
 use std::time::Instant;
 // use std::fs;
 
-
-
 fn main() -> std::io::Result<()> {
 
     let args: Vec<String> = env::args().skip(1).collect();
     //
     println!("program to grade: {}", &args[0]);
     let solution = &args[0][..];
-    let now = Instant::now();
-    // let _piper =  " | tail -n 1".to_owned();
     // build solution
     let mut build = Command::new("./build.sh").arg(&solution).spawn();
                 // remember to kill
     if let Ok(mut out) = build {
-        out.wait();
-        println!("{:?}", out.stdout);
+        // println!(" foo {:?}", out.stdout);
+        out.wait(); 
     }
+    let now = Instant::now();
     // run solution
     // measure solution
     // let mut app = Command::new("pmap").arg();
