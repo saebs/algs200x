@@ -20,6 +20,19 @@ fn main() -> std::io::Result<()> {
     //
     println!("program to grade: {}", &args[0]);
     let solution = &args[0][..];
+
+    // trim parent folder path 'src/'
+    let soln_substring = &solution[4..];
+    let mut app = String::new();
+    // trim solution source code extension '.rs'
+    for c in soln_substring.chars() {
+        if c != '.' {
+            app.push(c);
+        } else {
+            break;
+        }
+    }
+    println!("app name: {}", &app);
     // build solution
     let mut build = Command::new("./build.sh").arg(&solution).spawn();
                 // remember to kill
@@ -30,12 +43,9 @@ fn main() -> std::io::Result<()> {
     let now = Instant::now();
     // run solution
     // measure solution
-    // let mut app = Command::new("pmap").arg();
-    // if let Ok(mut child) = app.arg(spawn() {
-    //     println!("ehe {}", child.id());
-    // } else {
-    //     println!("mmm asazi");
-    // }
+    // run pmap on solution, but how mmm
+    // let mut pmap = Command::new("pmap")
+    //             .arg();
     let elapsed = now.elapsed();
 
     // somewhere along the line it should read program binary to run tests on

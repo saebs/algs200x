@@ -1,7 +1,7 @@
 #!/bin/bash
 #TODO SOME error handling when you have time
 solutionSourceCode="$1"
-echo $solutionSourceCode
+# echo $solutionSourceCode
 # trim rust extension
 app=${solutionSourceCode%.rs}
 # trim parent folder characters 'src/'
