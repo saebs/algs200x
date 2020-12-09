@@ -17,8 +17,7 @@ use std::str::from_utf8;
 fn main() -> std::io::Result<()> {
 
     let args: Vec<String> = env::args().skip(1).collect();
-    //
-    println!("program to grade: {}", &args[0]);
+    // println!("program to grade: {}", &args[0]);
     let solution = &args[0][..];
 
     // trim parent folder path 'src/'
@@ -32,7 +31,7 @@ fn main() -> std::io::Result<()> {
             break;
         }
     }
-    println!("app name: {}", &app);
+    println!("solution name: {}\n", &app);
     // build solution
     let mut build = Command::new("./build.sh").arg(&solution).spawn();
                 // remember to kill
@@ -87,10 +86,8 @@ fn main() -> std::io::Result<()> {
         Err(_) => (),
     }
 
-    
-    // somewhere along the line it should read program binary to run tests on
     // TODO or save to file
-    println!("time: {:.2?}", elapsed);
+    println!("\ntime: {:.2?}", elapsed);
     println!("memory: {}", &mem_used);
     println!("Parent pid is {}", process::id());
     Ok(())
