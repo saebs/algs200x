@@ -83,7 +83,7 @@ fn main() -> std::io::Result<()> {
     // until solution process done
     match solution_child.wait() {
         Ok(_) => println!("-- Ok --"),
-        _ => println!("something went wrong . check your source code solution"),
+        _ => println!("something went wrong"),
     }
 
     // TODO or save to file
