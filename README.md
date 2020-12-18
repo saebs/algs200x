@@ -30,6 +30,8 @@ We don't do cargo around here!!
 
 ## 1. Running Grader 
 $ ./grader.sh src/<solution>.rs
+  
+  <img src="https://i.kym-cdn.com/entries/icons/original/000/026/366/pather.jpg" alt="alt text" width="500" height="500">
 
 
 
