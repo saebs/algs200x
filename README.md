@@ -29,7 +29,10 @@ Do Not Use Cargo
 
 
 ## 1. Running Grader 
-$ ./grader.sh src/<solution>.rs
+1. Compile grader if running for the first time
+rustc -O grader.rs
+
+2. ./grader src/<solution>.rs
   
  
 
