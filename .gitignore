@@ -1,7 +1,7 @@
 .vscode/*
 *.vscode*
-algs/report/*
-algs/bin/**
+/report/*
+course1_algorithmic_toolbox/bin/**
 bin/*
 grader
 *.rlib
