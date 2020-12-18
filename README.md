@@ -20,8 +20,8 @@ Make use of the "stresser.rs" module to run stress tests in your solution.
 
 ## Building and Compiling Solution
 Use the provided build tools or scripts as much as possible. 
-We don't do cargo around here!!
-![](https://i.kym-cdn.com/entries/icons/original/000/026/366/pather.jpg)
+Do Not Use Cargo
+<img src="https://i.kym-cdn.com/entries/icons/original/000/026/366/pather.jpg" alt="alt text" width="252" height="141">
   
 1. To build only run this command in your shell. ./build.sh src/<solution>.rs
 
@@ -31,7 +31,7 @@ We don't do cargo around here!!
 ## 1. Running Grader 
 $ ./grader.sh src/<solution>.rs
   
-  <img src="https://i.kym-cdn.com/entries/icons/original/000/026/366/pather.jpg" alt="alt text" width="252" height="141">
+ 
 
 
 
