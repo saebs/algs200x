@@ -8,7 +8,6 @@
 // Algorithm correctness
 
 use std::env;
-use std::process;
 use std::process::{Command, Stdio};
 use std::time::Instant;
 // use std::fs;
@@ -29,71 +28,66 @@ fn main() -> std::io::Result<()> {
             break;
         }
     }
+
     println!("solution name: {}\n", &app);
     // build solution
-    let build = Command::new("./build.sh")
+    Command::new("./build.sh")
         .arg(&solution)
         .spawn()
         .unwrap()
         .wait()
         .expect("ma 1");
 
-
     // TODO Modularise The Benchmarking Code to re-use when test suites and PASS, FAIL logic implemented
-    
+
     // Solution Running Time Bechmark
     //***********************************
     let now = Instant::now();
-    let mut solution_child = Command::new("bin/./".to_owned() + &app )
-        .spawn()
-        .unwrap();
+    let mut solution_child = Command::new("bin/./".to_owned() + &app).spawn().unwrap();
     let solution_process_id = solution_child.id().to_string();
     let elapsed = now.elapsed();
-    
+
     // Memory Used by process Benchmark
     // ***************************************************
 
     // #!/bin/bash
     // pmap 6860 | tail -n 1 | awk 'END {print $NF}'
-    
+
     let pmap = Command::new("pmap")
-    .arg(&solution_process_id)
-    .stdout(Stdio::piped())
-    .spawn()
-    .expect("failed to start");
+        .arg(&solution_process_id)
+        .stdout(Stdio::piped())
+        .spawn()
+        .expect("failed to start");
     let pmap_out = pmap.stdout.expect("Failed bafo");
-    
+
     let tail = Command::new("tail")
-    .arg("-n 1")
-    .stdin(Stdio::from(pmap_out))
-    .stdout(Stdio::piped())
-    .spawn()
-    .expect("Failed to start tail part");
+        .arg("-n 1")
+        .stdin(Stdio::from(pmap_out))
+        .stdout(Stdio::piped())
+        .spawn()
+        .expect("Failed to start tail part");
     let tail_out = tail.stdout.expect("Kwehlule futhi");
 
     let awk = Command::new("awk")
-    .arg("END {print $NF}")
-    .stdin(Stdio::from(tail_out))
-    .stdout(Stdio::piped())
-    .spawn()
-    .expect("Failed to start  awk part");
+        .arg("END {print $NF}")
+        .stdin(Stdio::from(tail_out))
+        .stdout(Stdio::piped())
+        .spawn()
+        .expect("Failed to start  awk part");
     let awk_out = awk.wait_with_output().expect("awk part fail");
-    let mut memory_used = String::new();
-    match std::str::from_utf8(awk_out.stdout.as_slice()) {
-        Ok(ram) => memory_used = ram.to_string(),
-        Err(_) => process::exit(0),
+    let memory_used: String = match std::str::from_utf8(awk_out.stdout.as_slice()) {
+        Ok(ram) => ram.to_string(),
+        Err(_) => "Something went wrong".to_owned(),
+    };
+
+    // until solution process done
+    match solution_child.wait() {
+        Ok(_) => println!("-- Ok --"),
+        _ => println!("something went wrong . check your source code solution"),
     }
 
-    // until solution process done 
-    if let Ok(s) = solution_child.wait()
-    {
-        println!("{}", s);
-    };
-    
     // TODO or save to file
     println!("\ntime: {:.2?}", elapsed);
     println!("memory: {}", &memory_used);
-    // println!("solution id is {}", &solution_process_id);
-    // println!("grader id is {}", process::id());
     Ok(())
 }
