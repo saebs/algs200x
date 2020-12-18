@@ -1,4 +1,5 @@
 mod stresser;
+use std::dbg;
 
 /*
 
@@ -17,6 +18,7 @@ fn max_pairwise_naive(n: u32, numbers: &Vec<u32>) -> u32 {
     for i in 1..n {
         for j in i + 1..n {
             product = cmp::max(product, numbers[i as usize] * numbers[j as usize]);
+            // dbg!(product )
         }
     }
     product
