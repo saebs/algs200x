@@ -21,7 +21,7 @@ Make use of the "stresser.rs" module to run stress tests in your solution.
 ## Building and Compiling Solution
 Use the provided build tools or scripts as much as possible. 
 We don't do cargo around here!!
-![](https://www.google.com/url?sa=i&url=https%3A%2F%2Fknowyourmeme.com%2Fmemes%2Fwe-dont-do-that-here&psig=AOvVaw1TZDIv0Wlfa_MzRYPSJ8ik&ust=1608375889726000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDLz7yw1-0CFQAAAAAdAAAAABAI)
+![](https://i.kym-cdn.com/entries/icons/original/000/026/366/pather.jpg)
   
 1. To build only run this command in your shell. ./build.sh src/<solution>.rs
 
