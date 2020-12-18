@@ -1,18 +1,26 @@
 # Data Structures and Algorithms Specialization
-Coursera / Edx Algorithmic Design and Techniques Course
+Coursera / Edx
 
-# A personal project going through the problem sets using rust.
+https://www.coursera.org/specializations/data-structures-algorithms
+
+# A personal learning project going through the course using rust.
 
 The Goal of this Project is for self learning the Data Structures and Algorithms Specialization Course as instructed on Coursera/EDx together with Rust from first principles using only the Standard Libray and no Cargo. It also attempts to implement an automated grading tool (as an alternative to the course grader available for paid subscriptions).
-Contributions from test coverage to developing the self grader are most welcome.
+Contributions from tests and more tests to developing the grader are most welcome.
 
 # Requirements 
 Any Linux/ Unix like shell
 GNU utilities pmap,awk,tail
 Rust 1.45+
 
+# Setup
+cd <course directory>
+mkdir bin
+rustc grader.rs
+chmod +x grader
 
-## Write the Programming Challenges 
+
+## Programming Challenges 
 Save your solution source files in "src" folder in Course folder.
 You encouraged to use the rust standard library only. The objective is to learn from first principles.
 leave crates.io for real world production projects.
@@ -29,8 +37,7 @@ Do Not Use Cargo
 
 
 ## 1. Running Grader 
-1. Compile grader if running for the first time
-rustc -O grader.rs
+NB: Compile grader if running for the first time
 
 2. ./grader src/<solution>.rs
   
