@@ -9,8 +9,8 @@ app=${app:4}
 
 # Compile Solution
 echo compiling ...
-rustc --crate-type=rlib "stress.rs"
-rustc -Ov $solutionSourceCode -o bin/$app --extern lib=libstress.rlib -L "." 
+rustc --crate-type=rlib "stress.rs" --edition 2018
+rustc -Ov $solutionSourceCode -o bin/$app --extern lib=libstress.rlib -L "." --edition 2018 
 echo finished ...
 # Run Build
 # echo running ...
