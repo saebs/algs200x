@@ -1,5 +1,4 @@
-mod stresser;
-use std::dbg;
+// use std::dbg;
 
 /*
 
@@ -13,9 +12,10 @@ return product
 */
 
 // Fails when number not sorted.
-fn max_pairwise_naive(n: u32, numbers: &Vec<u32>) -> u32 {
-    let mut product: u32 = 0;
-    for i in 1..n {
+fn max_pairwise_naive(n: u64, numbers: &Vec<u64>) -> u64 {
+    assert!(n >= 2u64 && n <= 2_000_000);
+    let mut product: u64 = 0;
+    for i in 0..n {
         for j in i + 1..n {
             product = cmp::max(product, numbers[i as usize] * numbers[j as usize]);
             // dbg!(product )
@@ -39,25 +39,16 @@ index2  <- 1
 return A[index1] A[index2]
 */
 
-fn max_pairwise_fast(_n: u32, _numbers: &Vec<u32>) -> u32 {
+fn max_pairwise_fast(_n: u64, _numbers: &Vec<u64>) -> u64 {
     unimplemented!("implement fast algorithm")
 }
 use std::cmp;
 fn main() -> std::io::Result<()> {
     let info = r##" 
-    Sample 1.
-    Input: 
+    eg: 
     3
     1 2 3
-    Output:
-    6
     ---------------------------
-    Sample 2.
-    Input:
-    10
-    7 5 14 2 8 8 10 1 2 3
-    Output:
-    140
     "##;
     println!("{}", info);
 
@@ -65,19 +56,15 @@ fn main() -> std::io::Result<()> {
     ::std::io::stdin().read_line(&mut buff)?;
     let mut line1 = buff.split_whitespace();
     // collect into vec of u32s
-    let n: u32 = line1.next().unwrap().parse::<u32>().unwrap();
+    let n: u64 = line1.next().unwrap().parse::<u64>().unwrap();
     // eprintln!("{:?}", n);
     let mut line2 = String::new();
     ::std::io::stdin().read_line(&mut line2)?;
-    let numbers: Vec<u32> = line2
+    let numbers: Vec<u64> = line2
         .split_whitespace()
-        .map(|n| n.parse::<u32>().unwrap())
+        .map(|n| n.parse::<u64>().unwrap())
         .collect();
     // eprintln!("{:?}", numbers);
-    match n {
-        3u32 => assert_eq!(6, max_pairwise_naive(n, &numbers)),
-        10u32 => assert_eq!(140, max_pairwise_naive(n, &numbers)),
-        _ => println!("Output: {}", max_pairwise_naive(n, &numbers)),
-    }
+    println!("Output: {}", max_pairwise_naive(n, &numbers));
     Ok(())
 }
