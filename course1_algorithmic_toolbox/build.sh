@@ -9,8 +9,8 @@ app=${app:4}
 
 # Compile Solution
 echo compiling ...
-rustc --crate-type=rlib "src/stresser.rs"
-rustc -Ov $solutionSourceCode -o bin/$app --extern lib=libstresser.rlib 
+rustc --crate-type=rlib "stress.rs"
+rustc -Ov $solutionSourceCode -o bin/$app --extern lib=libstress.rlib -L "." 
 echo finished ...
 # Run Build
 # echo running ...

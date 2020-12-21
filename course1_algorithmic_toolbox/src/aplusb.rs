@@ -21,7 +21,7 @@
 // C C++ Java Python Haskell JavaScript Scala
 // 1 1 1.5 5 2 5 3
 // Memory limit. 512 Mb.
-
+// extern crate stress;
 fn sum_of_two_digits(a: i64, b: i64) -> i64 {
     a + b 
 }

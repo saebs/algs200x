@@ -1,3 +1,3 @@
-pub fn stress_test() {
+pub fn test() {
     unimplemented!("TO stress you")
 }
