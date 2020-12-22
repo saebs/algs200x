@@ -87,7 +87,7 @@ fn main() -> std::io::Result<()> {
     }
 
     // TODO or save to file
-    println!("\ntime: {:.2?}", elapsed);
+    println!("\ntime: {:.2?}", elapsed.as_secs_f64());
     println!("memory: {}", &memory_used);
     Ok(())
 }
