@@ -1,4 +1,3 @@
-use core::arch::x86_64;
 //_rdrand64_step
 /*
 
@@ -18,10 +17,23 @@ StressTest(N;M):
             print(“Wrong answer: ”, result1, result2)
             return
 */
+
 #[macro_export]
 macro_rules! test {
-    ($n:expr, $model_soln:ident, $main_soln:ident) => {
+    ($x:expr, $model_soln:ident, $main_soln:ident) => {
+        if $model_soln($x) == $main_soln($x) {
+            println!("OK");
+        } else {
+            println!("Wrong answer: {}, {}", $model_soln($x), $main_soln($x));
+            std::process::exit();
+        }
     };
-    ($n:expr,$m:expr, $model_soln:ident, $main_soln:ident) => {
+    ($model_soln:ident($a:expr, $b:expr), $main_soln:ident($c:expr, $d:expr)) => {
+        if $model_soln($a, $b) == $main_soln($c, $d) {
+            println!("OK");
+        } else {
+            println!("Wrong answer: {}, {}", $model_soln($a, $b), $main_soln($c, $d));
+            std::process::exit();
+        }
     };
 }

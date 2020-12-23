@@ -10,6 +10,8 @@
 use std::env;
 use std::process::{Command, Stdio};
 use std::time::Instant;
+
+extern crate stress;
 // use std::fs;
 // use std::str::from_utf8;
 fn main() -> std::io::Result<()> {

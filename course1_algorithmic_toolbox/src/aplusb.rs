@@ -21,20 +21,20 @@
 // C C++ Java Python Haskell JavaScript Scala
 // 1 1 1.5 5 2 5 3
 // Memory limit. 512 Mb.
-// extern crate stress;
-fn sum_of_two_digits(a: i64, b: i64) -> i64 {
+extern crate stress;
+
+fn sum_of_two_digits(a: u64, b: u64) -> u64 {
     a + b 
 }
 
 fn main() -> std::io::Result<()> {
+    stress::test!(sum_of_two_digits(1u64, 3u64), sum_of_two_digits(1u64, 1u64));    
     let mut buff = String::new();
     ::std::io::stdin().read_line(&mut buff)?;
     let mut words = buff.split_whitespace();
 
-    let a: i64 = words.next().unwrap().parse().unwrap();
-    let b: i64 = words.next().unwrap().parse().unwrap();
-    // enforce contraints
-    assert!(a >= 0 && a <= 9 && b >= 0 && b <= 9);
+    let a: u64 = words.next().unwrap().parse().unwrap();
+    let b: u64 = words.next().unwrap().parse().unwrap();
 
     println!("{}", sum_of_two_digits(a, b));
     Ok(())
