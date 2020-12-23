@@ -1,4 +1,5 @@
-
+sue core::arch::x86_64;
+//_rdrand64_step
 /*
 
 
@@ -17,7 +18,10 @@ StressTest(N;M):
             print(“Wrong answer: ”, result1, result2)
             return
 */
-
-pub fn test(n: u64, m: u64) {
-    unimplemented!("TO stress you")
+#[macro_export]
+macro_rules! test {
+    ($n:expr, $model_soln:ident, $main_soln:ident) => {
+    };
+    ($n:expr,$m:expr, $model_soln:ident, $main_soln:ident) => {
+    };
 }
