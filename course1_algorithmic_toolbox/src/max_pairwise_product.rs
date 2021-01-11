@@ -1,5 +1,4 @@
 mod stresser;
-use std::dbg;
 
 /*
 
@@ -13,12 +12,11 @@ return product
 */
 
 // Fails when number not sorted.
-fn max_pairwise_naive(n: u32, numbers: &Vec<u32>) -> u32 {
-    let mut product: u32 = 0;
+fn max_pairwise_naive(n: u64, numbers: &Vec<u64>) -> u64 {
+    let mut product: u64 = 0;
     for i in 1..n {
         for j in i + 1..n {
             product = cmp::max(product, numbers[i as usize] * numbers[j as usize]);
-            // dbg!(product )
         }
     }
     product
@@ -27,57 +25,61 @@ fn max_pairwise_naive(n: u32, numbers: &Vec<u32>) -> u32 {
 /*
 
 
-MaxPairwiseProductFast(A[1 : : :n]):
+MaxPairwiseProductFast(A[1...n]):
 index1 <-  1
     for i from 2 to n:
         if A[i] > A[index1]:
             index1 <- i
-index2  <- 1
-    for i from 2 to n:
-        if A[i] , A[index1] and A[i] > A[index2]:
-            index2 <- i
-return A[index1] A[index2]
+
+if index1 = 1:
+    index2 <- 2
+else:
+    index2 <- 1
+
+for i from 1 to n:
+    if A[i] != A[index1] and A[i] > A[index2]:
+        index2 <- i
+return A[index1] * A[index2]
 */
 
-fn max_pairwise_fast(_n: u32, _numbers: &Vec<u32>) -> u32 {
-    unimplemented!("implement fast algorithm")
+fn max_pairwise_product_fast(n: u64, numbers: &Vec<u64>) -> u64 {
+    let mut index1 = 0usize;
+    for i in 1..n {
+        if numbers[i as usize] > numbers[index1] {
+            index1 = i as usize;
+        }
+    }
+
+    let mut index2 = 0usize;
+    if index1 == 0usize {
+        index2 = 1;
+    } 
+
+    // println("two fer {}", index2);
+
+    for i in 0..n {
+        if numbers[i as usize] != numbers[index1] && numbers[i as usize] > numbers[index2] {
+            index2 = i as usize;
+        }
+    }
+    numbers[index1] * numbers[index2]
 }
+
 use std::cmp;
 fn main() -> std::io::Result<()> {
-    let info = r##" 
-    Sample 1.
-    Input: 
-    3
-    1 2 3
-    Output:
-    6
-    ---------------------------
-    Sample 2.
-    Input:
-    10
-    7 5 14 2 8 8 10 1 2 3
-    Output:
-    140
-    "##;
-    println!("{}", info);
-
     let mut buff = String::new();
     ::std::io::stdin().read_line(&mut buff)?;
     let mut line1 = buff.split_whitespace();
-    // collect into vec of u32s
-    let n: u32 = line1.next().unwrap().parse::<u32>().unwrap();
+    // collect into vec of u64s
+    let n: u64 = line1.next().unwrap().parse::<u64>().unwrap();
     // eprintln!("{:?}", n);
     let mut line2 = String::new();
     ::std::io::stdin().read_line(&mut line2)?;
-    let numbers: Vec<u32> = line2
+    let numbers: Vec<u64> = line2
         .split_whitespace()
-        .map(|n| n.parse::<u32>().unwrap())
+        .map(|n| n.parse::<u64>().unwrap())
         .collect();
     // eprintln!("{:?}", numbers);
-    match n {
-        3u32 => assert_eq!(6, max_pairwise_naive(n, &numbers)),
-        10u32 => assert_eq!(140, max_pairwise_naive(n, &numbers)),
-        _ => println!("Output: {}", max_pairwise_naive(n, &numbers)),
-    }
+    println!("{}", max_pairwise_product_fast(n, &numbers));
     Ok(())
 }
