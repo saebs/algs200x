@@ -26,9 +26,12 @@ extern crate stress;
 fn sum_of_two_digits(a: u64, b: u64) -> u64 {
     a + b 
 }
+fn tenner(a: u64) -> u64 {
+    a + 10
+}
 
 fn main() -> std::io::Result<()> {
-    stress::test!(sum_of_two_digits(1u64, 3u64), sum_of_two_digits(1u64, 1u64));    
+    stress::test!(1u64,tenner, tenner);    
     let mut buff = String::new();
     ::std::io::stdin().read_line(&mut buff)?;
     let mut words = buff.split_whitespace();
