@@ -1,5 +1,4 @@
-mod stresser;
-
+extern crate stress;
 /*
 
 MaxPairwiseProductNaive(A[1 : : :n]):
@@ -80,6 +79,8 @@ fn main() -> std::io::Result<()> {
         .map(|n| n.parse::<u64>().unwrap())
         .collect();
     // eprintln!("{:?}", numbers);
-    println!("{}", max_pairwise_product_fast(n, &numbers));
+    // println!("{}", max_pairwise_product_fast(n, &numbers));
+    stress::test!(2u64, 1000u64, max_pairwise_naive, max_pairwise_product_fast);
+
     Ok(())
 }

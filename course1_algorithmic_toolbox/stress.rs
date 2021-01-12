@@ -18,22 +18,47 @@ StressTest(N;M):
             return
 */
 
+
 #[macro_export]
 macro_rules! test {
-    ($x:expr, $model_soln:ident, $main_soln:ident) => {
-        if $model_soln($x) == $main_soln($x) {
-            println!("OK");
-        } else {
-            println!("Wrong answer: {}, {}", $model_soln($x), $main_soln($x));
-            std::process::exit();
+    // The pattern for a single `eval`
+    ($n:expr, $model_soln:ident, $main_soln:ident ) => {{
+        {
+            let input1: u64  = $n; // Force types to be integers
+            let result1 = $model_soln(&vec![input1, 2u64]);
+            let result2 = $main_soln(&vec![input1, 2u64]);
+            if result1 == result2 {
+                println!("OK");
+            } else {
+                println!(
+                    "Wrong answer: {}, {}",
+                    $model_soln(),
+                    $main_soln()
+                );
+                // break;
+            }
         }
-    };
-    ($model_soln:ident($a:expr, $b:expr), $main_soln:ident($c:expr, $d:expr)) => {
-        if $model_soln($a, $b) == $main_soln($c, $d) {
-            println!("OK");
-        } else {
-            println!("Wrong answer: {}, {}", $model_soln($a, $b), $main_soln($c, $d));
-            std::process::exit();
+    }};
+
+    ($n:expr, $m:expr, $model_soln:ident, $main_soln:ident ) => {{
+        {
+            let input1: u64 = $n; // Force types to be integers
+            let input2 = vec![$m, 2u64];
+            // TODO 
+            // generate random integer between 2 and n
+            // generate and allocate array with random from 0 to m
+            let result1 = $model_soln(input1, &input2);
+            let result2 = $main_soln(input1, &input2);
+            if result1 == result2 {
+                println!("OK");
+            } else {
+                println!(
+                    "Wrong answer: {}, {}",
+                    result1,
+                    result2 
+                );
+                // break;
+            }
         }
-    };
+    }}; 
 }
