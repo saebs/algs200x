@@ -1,4 +1,5 @@
-extern crate stress;
+extern crate utils;
+use utils::*;
 /*
 
 MaxPairwiseProductNaive(A[1 : : :n]):
@@ -52,7 +53,7 @@ fn max_pairwise_product_fast(n: u64, numbers: &Vec<u64>) -> u64 {
     let mut index2 = 0usize;
     if index1 == 0usize {
         index2 = 1;
-    } 
+    }
 
     // println("two fer {}", index2);
 
@@ -79,8 +80,8 @@ fn main() -> std::io::Result<()> {
         .map(|n| n.parse::<u64>().unwrap())
         .collect();
     // eprintln!("{:?}", numbers);
-    // println!("{}", max_pairwise_product_fast(n, &numbers));
-    stress::test!(2u64, 1000u64, max_pairwise_naive, max_pairwise_product_fast);
+    // t println!("{}", max_pairwise_product_fast(n, &numbers));
+    stress::test!(2u64, 2u64, max_pairwise_naive, max_pairwise_product_fast);
 
     Ok(())
 }
