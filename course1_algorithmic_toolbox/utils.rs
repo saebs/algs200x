@@ -1,9 +1,11 @@
 //_rdrand64_step
 //
 
+// extern crate rand;
+// use rand::prelude::*;
 pub mod dsa {
 
-    enum InputFormat {
+    pub enum InputFormat {
         IntegerN(i64),
         IntegersNandM(Vec<i64>),
         SeqOfnNIntegers(Vec<i64>), 
@@ -16,36 +18,35 @@ pub mod dsa {
         let mut buff = String::new();
         // options
         match problem_i {
-            InputFormat::IntegerN => {
+            InputFormat::IntegerN(_)=> {
             ::std::io::stdin().read_line(&mut buff)?;
             let mut line1 = buff.split_whitespace();
-            let n: u64 = line1.next().unwrap().parse::<u64>().unwrap();
+            let n: i64 = line1.next().unwrap().parse::<i64>().unwrap();
             Ok(InputFormat::IntegerN(n))
             },
-            InputFormat::IntegersNandM => {
+            InputFormat::IntegersNandM(_) => {
             ::std::io::stdin().read_line(&mut buff)?;
             let mut line1 = buff.split_whitespace();
-            let n: u64 = line1.next().unwrap().parse::<u64>().unwrap();
-            let m: u64 = line1.next().unwrap().parse::<u64>().unwrap();
+            let n: i64 = line1.next().unwrap().parse::<i64>().unwrap();
+            let m: i64 = line1.next().unwrap().parse::<i64>().unwrap();
             Ok(InputFormat::IntegersNandM(vec![n, m]))
             },
-            InputFormat::SeqOfnNIntegers => {
+            InputFormat::SeqOfnNIntegers(_) => {
             ::std::io::stdin().read_line(&mut buff)?;
-            let mut line1 = buff.split_whitespace();
-            let seq_of_n_integers: Vec<u64> = line1
+            let seq_of_n_integers: Vec<i64> = buff 
             .split_whitespace()
-            .map(|n| n.parse::<u64>().unwrap())
+            .map(|n| n.parse::<i64>().unwrap())
             .collect();
             Ok(InputFormat::SeqOfnNIntegers(seq_of_n_integers))
             }, 
-            InputFormat::Nlines => {
-                let mut nlines = ::std::io::stdin().lock().lines();
-                // parse all line to u64 and into collection of vectors
+            InputFormat::Nlines(_) => {
+                // let mut _nlines = ::std::io::stdin().lock();
+                // parse all line to i64 and into collection of vectors
                 let all = vec![];
                 Ok(InputFormat::Nlines(all))
             },
             _ => {
-                Err("to do")
+                Err(std::io::Error::new(std::io::ErrorKind::Other, "oh no!"))
             }
 
         }

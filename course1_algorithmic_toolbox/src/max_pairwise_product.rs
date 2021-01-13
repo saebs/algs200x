@@ -67,21 +67,8 @@ fn max_pairwise_product_fast(n: u64, numbers: &Vec<u64>) -> u64 {
 
 use std::cmp;
 fn main() -> std::io::Result<()> {
-    let mut buff = String::new();
-    ::std::io::stdin().read_line(&mut buff)?;
-    let mut line1 = buff.split_whitespace();
-    // collect into vec of u64s
-    let n: u64 = line1.next().unwrap().parse::<u64>().unwrap();
-    // eprintln!("{:?}", n);
-    let mut line2 = String::new();
-    ::std::io::stdin().read_line(&mut line2)?;
-    let numbers: Vec<u64> = line2
-        .split_whitespace()
-        .map(|n| n.parse::<u64>().unwrap())
-        .collect();
-    // eprintln!("{:?}", numbers);
-    // t println!("{}", max_pairwise_product_fast(n, &numbers));
-    stress::test!(2u64, 2u64, max_pairwise_naive, max_pairwise_product_fast);
+
+    test!(2u64, 2u64, max_pairwise_naive, max_pairwise_product_fast);
 
     Ok(())
 }
