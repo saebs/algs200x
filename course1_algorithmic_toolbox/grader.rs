@@ -1,3 +1,4 @@
+#![cfg(target_os = ["linux", "macos"])]
 //! Self Grading Tool
 
 // MEASURE and enforce Constraints
