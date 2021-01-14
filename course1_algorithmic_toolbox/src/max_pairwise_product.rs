@@ -1,4 +1,4 @@
-extern crate utils;
+extern crate algs_std;
 use utils::*;
 /*
 
