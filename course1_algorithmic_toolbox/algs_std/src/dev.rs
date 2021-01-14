@@ -1,5 +1,8 @@
 #![macro_use]
 
+use std::time::Instant;
+
+
 #[macro_export]
 macro_rules! test {
     // The pattern for a single `eval`
@@ -35,6 +38,19 @@ macro_rules! test {
         }
     }};
 }
+
+#[macro_export]
+macro_rules! running_time {
+    ($sol_n:ident($($n:expr), *)) => {
+       let moment = Instant::now(); 
+       $sol_n()
+       let done = moment.elapsed();
+       println!("Running Time: {:.2?}", &done.as_secs_f64());
+       done
+    };
+    // consider options with limits or constraints
+}
+
 
 /*
 
