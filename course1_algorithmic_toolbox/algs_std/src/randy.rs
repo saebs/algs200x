@@ -66,15 +66,17 @@
 //! let rng = fastrand::Rng::new();
 //! let mut bytes: Vec<u8> = repeat_with(|| rng.u8(..)).take(10_000).collect();
 //! ```
-//! 
-//! 
-//! 
+//!
+//!
+//!
 //! Original work Adapted from https://github.com/smol-rs/fastrand
 //! The Implememtation remains unchanged
 //! https://raw.githubusercontent.com/smol-rs/fastrand/master/src/lib.rs
+
 #![allow(dead_code)]
 #![forbid(unsafe_code)]
-#![warn(missing_docs, missing_debug_implementations, rust_2018_idioms)]
+#![macro_use]
+// #![warn(missing_docs, missing_debug_implementations, rust_2018_idioms)]
 
 use std::cell::Cell;
 use std::collections::hash_map::DefaultHasher;
