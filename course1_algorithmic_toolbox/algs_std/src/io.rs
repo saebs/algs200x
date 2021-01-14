@@ -19,6 +19,7 @@ pub enum InputFormat {
     NonNegativeIntegersNandM(Vec<u64>),
 }
 // generic input handling
+// TODO: lets create a macro yeh?
 pub fn parse_input(problem_i: &InputFormat) -> std::io::Result<InputFormat> {
     let mut buff = String::new();
     // options
