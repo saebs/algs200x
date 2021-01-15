@@ -18,7 +18,7 @@ macro_rules! running_time {
 
 
 #[macro_export]
-macro_rules! test {
+macro_rules! test_eq {
     ($naive_soln:ident, $fast_soln:ident, $($arg:expr)+) => {
         let result1 = $naive_soln($($arg)+);
         let result2 = $fast_soln($($arg)+);
