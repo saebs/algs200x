@@ -67,7 +67,7 @@ fn max_pairwise_product_fast(n: u64, numbers: &Vec<u64>) -> u64 {
 use std::cmp;
 fn main() -> std::io::Result<()> {
 
-    algs_std::test!(2u64, 2u64, max_pairwise_naive, max_pairwise_product_fast);
+    algs_std::test_eq!(max_pairwise_naive, max_pairwise_product_fast, 2, &vec![1]);
 
     Ok(())
 }

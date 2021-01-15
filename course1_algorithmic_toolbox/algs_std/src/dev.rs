@@ -19,19 +19,19 @@ macro_rules! running_time {
 
 #[macro_export]
 macro_rules! test_eq {
-    ($naive_soln:ident, $fast_soln:ident, $($arg:expr)+) => {
-        let result1 = $naive_soln($($arg)+);
-        let result2 = $fast_soln($($arg)+);
-        if !(&result1 == &result2) {
-            panic!("Wrong Answer!:  `{:?}`  `{:?}` ", *result1, *result2);
+    ($naive_soln:ident, $fast_soln:ident, $($arg:expr),+) => {
+        let result1 = $naive_soln($($arg),+);
+        let result2 = $fast_soln($($arg),+);
+        if !(result1 == result2) {
+            panic!("Wrong Answer!:  `{:?}`  `{:?}` ", result1, result2);
         } else {
             println!("Ok");
         }
     };
-    ($test_val:expr, $your_soln:ident($($arg:expr)+)) => {
-        let answer = $your_soln($($arg)+);
-        if !(&$test_val == &answer) {
-            panic!("Wrong Answer!:  `{:?}`  `{:?}` ", *$test_val, *answer);
+    ($test_val:expr, $your_soln:ident($($arg:expr),+)) => {
+        let answer = $your_soln($($arg),+);
+        if !($test_val == answer) {
+            panic!("Wrong Answer!:  `{:?}`  `{:?}` ", $test_val, answer);
         } else {
             println!("Ok");
         }
