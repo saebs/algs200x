@@ -1,72 +1,31 @@
 #![macro_use]
 
 use std::time::Instant;
+use std::mem;
 
-
-#[macro_export]
-macro_rules! test {
-    // The pattern for a single `eval`
-    ($n:expr, $model_soln:ident, $main_soln:ident ) => {{
-        {
-            let input1: u64 = $n; // Force types to be integers
-            let result1 = $model_soln(&vec![input1, 2u64]);
-            let result2 = $main_soln(&vec![input1, 2u64]);
-            if result1 == result2 {
-                println!("OK");
-            } else {
-                println!("Wrong answer: {}, {}", $model_soln(), $main_soln());
-                // break;
-            }
-        }
-    }};
-
-    ($n:expr, $m:expr, $model_soln:ident, $main_soln:ident ) => {{
-        {
-            let input1: u64 = $n; // Force types to be integers
-            let input2 = vec![$m, 2u64];
-            // TODO
-            // generate random integer between 2 and n
-            // generate and allocate array with random from 0 to m
-            let result1 = $model_soln(input1, &input2);
-            let result2 = $main_soln(input1, &input2);
-            if result1 == result2 {
-                println!("OK");
-            } else {
-                println!("Wrong answer: {}, {}", result1, result2);
-                // break;
-            }
-        }
-    }};
-}
-
+/// Measures the Algorithm Running Time in seconds
 #[macro_export]
 macro_rules! running_time {
-    ($sol_n:ident($($n:expr), *)) => {
+    ($sol_n:ident($($n:expr),*)) => {
        let moment = Instant::now(); 
-       $sol_n()
+       $sol_n($($n),*)
        let done = moment.elapsed();
-       println!("Running Time: {:.2?}", &done.as_secs_f64());
+       println!("Running Time: {:.3?}", &done.as_secs_f64());
        done
     };
     // consider options with limits or constraints
 }
 
 
-/*
-
-
-StressTest(N;M):
-    while true:
-        n random integer between 2 and N
-        allocate array A[1 : : :n]
-        for i from 1 to n:
-            A[i] random integer between 0 and M
-        print(A[1 : : :n])
-            result1  MaxPairwiseProductNaive(A)
-            result2  MaxPairwiseProductFast(A)
-        if result1 = result2:
-            print(“OK”)
-        else:
-            print(“Wrong answer: ”, result1, result2)
-            return
-*/
+#[macro_export]
+macro_rules! soln_eq {
+    ($naive_soln:ident, $fast_soln:ident, $($arg:expr)+) => {
+        let result1 = $naive_soln($($arg)+);
+        let result2 = $fast_soln($($arg)+);
+        if !(&result1 == &result2) {
+            panic!("Wrong Answer!:  `{:?}`  `{:?}` ", *result1, *result2);
+        } else {
+            println!("Ok");
+        }
+    };
+}
