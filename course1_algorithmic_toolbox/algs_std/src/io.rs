@@ -1,9 +1,6 @@
 #![macro_use]
 
 use std::io::{Error, ErrorKind};
-fn ohsh_t() -> std::io::Error {
-    Error::new(ErrorKind::Other, "oh no!")
-}
 
 pub fn foo() {
     println!("{}", crate::randy::bool());
@@ -18,25 +15,35 @@ pub enum InputFormat {
     IntegerNandSeqOfNIntegers(i64, Vec<i64>),
     NonNegativeIntegersNandM(Vec<u64>),
 }
+
+pub fn read_integer_n() -> i64 {
+    let input = io::stdin().lock().lines();
+    loop {
+            for line in io::stdin().lock().lines() {
+                let input = line.expect("Failed to read line");
+                match input.trim().parse::<i64>() {
+                    Ok(n) => n,
+                    Err(e) => println!("Failed to read integer: {}", e),
+                }
+        }
+    }
+}
+
+pub fn read_integer_seq(max_elements: i64) -> Vec<i64> {
+    // collect into vec i64 upto max_elements
+    unimplemented!();
+
+}
+
+
 // generic input handling
 // TODO: lets create a macro yeh?
-pub fn parse_input(problem_i: &InputFormat) -> std::io::Result<InputFormat> {
-    let mut buff = String::new();
-    // options
-    match problem_i {
-        InputFormat::IntegerN(_) => {
-            ::std::io::stdin().read_line(&mut buff)?;
-            let mut line1 = buff.split_whitespace();
-            let n: i64 = line1.next().unwrap().parse::<i64>().unwrap();
-            Ok(InputFormat::IntegerN(n))
-        }
-        InputFormat::IntegersNandM(_) => {
+    /*ptions
             ::std::io::stdin().read_line(&mut buff)?;
             let mut line1 = buff.split_whitespace();
             let n: i64 = line1.next().unwrap().parse::<i64>().unwrap();
             let m: i64 = line1.next().unwrap().parse::<i64>().unwrap();
             Ok(InputFormat::IntegersNandM(vec![n, m]))
-        }
         InputFormat::SeqOfnNIntegers(_) => {
             ::std::io::stdin().read_line(&mut buff)?;
             let seq_of_n_integers: Vec<i64> = buff
@@ -45,12 +52,5 @@ pub fn parse_input(problem_i: &InputFormat) -> std::io::Result<InputFormat> {
                 .collect();
             Ok(InputFormat::SeqOfnNIntegers(seq_of_n_integers))
         }
-        InputFormat::Nlines(_) => {
-            // let mut _nlines = ::std::io::stdin().lock();
-            // parse all line to i64 and into collection of vectors
-            let all = vec![];
-            Ok(InputFormat::Nlines(all))
-        }
-        _ => Err(ohsh_t()),
-    }
-}
+
+        */
