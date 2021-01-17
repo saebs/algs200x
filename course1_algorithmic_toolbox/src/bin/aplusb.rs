@@ -21,23 +21,16 @@
 // C C++ Java Python Haskell JavaScript Scala
 // 1 1 1.5 5 2 5 3
 // Memory limit. 512 Mb.
-extern crate stress;
+extern crate algs_std;
+use algs_std::io::*;
 
-fn sum_of_two_digits(a: u64, b: u64) -> u64 {
+fn sum_of_two_digits(a: i64, b: i64) -> i64 {
     a + b 
 }
-fn tenner(a: u64) -> u64 {
-    a + 10
-}
-
+ 
 fn main() -> std::io::Result<()> {
-    stress::test!(1u64,tenner, tenner);    
-    let mut buff = String::new();
-    ::std::io::stdin().read_line(&mut buff)?;
-    let mut words = buff.split_whitespace();
-
-    let a: u64 = words.next().unwrap().parse().unwrap();
-    let b: u64 = words.next().unwrap().parse().unwrap();
+    let a = read_integer_n();
+    let b = read_integer_n();
 
     println!("{}", sum_of_two_digits(a, b));
     Ok(())
