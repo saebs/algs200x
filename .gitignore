@@ -6,4 +6,5 @@ bin/*
 grader
 *.rlib
 **/target/**
+*.lock
 
