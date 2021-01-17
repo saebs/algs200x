@@ -25,15 +25,18 @@ macro_rules! test_eq {
         let result1 = $naive_soln($($arg),+);
         let result2 = $fast_soln($($arg),+);
         if !(result1 == result2) {
-            panic!("Wrong Answer!:  `{:?}`  `{:?}` ", result1, result2);
+            println!("Wrong Answer!:  `{:?}`  `{:?}` ", result1, result2);
+            std::process::exit();
         } else {
             println!("Ok");
         }
     };
-    ($test_val:expr, $your_soln:ident($($arg:expr),+)) => {
-        let answer = $your_soln($($arg),+);
-        if !($test_val == answer) {
-            panic!("Wrong Answer!:  `{:?}`  `{:?}` ", $test_val, answer);
+    ($naive_soln:ident, $fast_soln:ident, $($arg:expr),+) => {
+        let result1 = $naive_soln($($arg),+);
+        let result2 = $fast_soln($($arg),+);
+        if !(result1 == result2) {
+            println!("Wrong Answer!:  `{:?}`  `{:?}` ", result1, result2);
+            std::process::exit();
         } else {
             println!("Ok");
         }
