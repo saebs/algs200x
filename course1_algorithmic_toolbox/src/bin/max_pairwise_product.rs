@@ -1,18 +1,17 @@
-extern crate algs_std;
+use algs_std::io::*;
 /*
-
 MaxPairwiseProductNaive(A[1 : : :n]):
 product <- 0
 for i from 1 to n:
     for j from i + 1 to n:
         product <- max(product;A[i] A[j])
 return product
-
 */
 
 // Fails when number not sorted.
-fn max_pairwise_naive(n: u64, numbers: &Vec<u64>) -> u64 {
-    let mut product: u64 = 0;
+fn max_pairwise_naive(numbers: &Vec<i64>) -> i64 {
+    let n = numbers.len();
+    let mut product: i64 = 0;
     for i in 1..n {
         for j in i + 1..n {
             product = cmp::max(product, numbers[i as usize] * numbers[j as usize]);
@@ -22,8 +21,6 @@ fn max_pairwise_naive(n: u64, numbers: &Vec<u64>) -> u64 {
 }
 
 /*
-
-
 MaxPairwiseProductFast(A[1...n]):
 index1 <-  1
     for i from 2 to n:
@@ -41,7 +38,8 @@ for i from 1 to n:
 return A[index1] * A[index2]
 */
 
-fn max_pairwise_product_fast(n: u64, numbers: &Vec<u64>) -> u64 {
+fn max_pairwise_product_fast(numbers: &Vec<i64>) -> i64 {
+    let n = numbers.len();
     let mut index1 = 0usize;
     for i in 1..n {
         if numbers[i as usize] > numbers[index1] {
@@ -67,7 +65,14 @@ fn max_pairwise_product_fast(n: u64, numbers: &Vec<u64>) -> u64 {
 use std::cmp;
 fn main() -> std::io::Result<()> {
 
-    algs_std::test_eq!(max_pairwise_naive, max_pairwise_product_fast, 2, &vec![1]);
+    let n = read_integer_n();
+    let numbers = read_integer_seq(n as usize).unwrap(); 
+
+
+    let fin = max_pairwise_product_fast(&numbers);
+    println!("{}", fin);
+
+    // algs_std::test_eq!(max_pairwise_naive, max_pairwise_product_fast, &numbers);
 
     Ok(())
 }
