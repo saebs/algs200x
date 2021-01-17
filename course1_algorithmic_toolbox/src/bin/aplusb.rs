@@ -11,7 +11,7 @@
 // the grading system.
 // Input format. Integers a and b on the same line (separated by a space).
 // Output format. The sum of a and b.
-// Constraints. 0  a;b  9.
+// Constraints. 0 =< a;b =< 9.
 // Sample.
 // Input:
 // 9 7
@@ -25,6 +25,7 @@
 use algs_std::io::*;
 
 fn sum_of_two_digits(a: i64, b: i64) -> i64 {
+    assert!(((0 <= a && b <= 9) && (0 <= b && a <= 9)), "oustide of constraints" );
     a + b 
 }
  
