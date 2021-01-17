@@ -1,37 +1,35 @@
 #![macro_use]
 
 use std::io::{Error, ErrorKind};
+use std::io;
+use std::io::prelude::*;
 
 pub fn foo() {
     println!("{}", crate::randy::bool());
 }
 
-#[derive(Debug)]
-pub enum InputFormat {
-    IntegerN(i64),
-    IntegersNandM(Vec<i64>),
-    SeqOfnNIntegers(Vec<i64>),
-    Nlines(Vec<Vec<i64>>),
-    IntegerNandSeqOfNIntegers(i64, Vec<i64>),
-    NonNegativeIntegersNandM(Vec<u64>),
-}
-
-pub fn read_integer_n() -> i64 {
-    let input = io::stdin().lock().lines();
+pub fn read_integer_n() ->  i64 {
+    let stdin = io::stdin();
     loop {
-            for line in io::stdin().lock().lines() {
+            for line in stdin.lock().lines() {
                 let input = line.expect("Failed to read line");
                 match input.trim().parse::<i64>() {
-                    Ok(n) => n,
-                    Err(e) => println!("Failed to read integer: {}", e),
+                    Ok(n) => return n,
+                    Err(e) => println!("Failed to read number {}", e), 
                 }
         }
     }
 }
 
-pub fn read_integer_seq(max_elements: i64) -> Vec<i64> {
+pub fn read_integer_seq(max_elements: usize) -> std::io::Result<Vec<i64>> {
     // collect into vec i64 upto max_elements
-    unimplemented!();
+    let mut buffer = String::new();
+    io::stdin().read_line(&mut buffer)?;
+    let seq: Vec<i64> = buffer.split_whitespace()
+        .map(|n| n.parse::<i64>().unwrap())
+        .take(max_elements)
+        .collect();
+       Ok(seq) 
 
 }
 
