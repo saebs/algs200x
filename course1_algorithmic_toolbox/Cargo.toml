@@ -1,0 +1,13 @@
+[package]
+name = "course1_algorithmic_toolbox"
+version = "0.1.0"
+authors = ["saebs <ntabenism@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+algs_std = {path = "algs_std"}
+
+
+[workspace]
