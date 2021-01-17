@@ -25,7 +25,7 @@ pub fn read_integer_n() ->  i64 {
 /// Read A sequence of `n` integers from Standard Input /cli
 pub fn read_integer_seq(max_elements: usize) -> std::io::Result<Vec<i64>> {
     // collect into vec i64 upto max_elements
-    let mut buffer = String::new();
+    let mut buffer = String::with_capacity(max_elements);
     io::stdin().read_line(&mut buffer)?;
     let seq: Vec<i64> = buffer.split_whitespace()
         .map(|n| n.parse::<i64>().unwrap())
