@@ -5,4 +5,5 @@ course1_algorithmic_toolbox/bin/**
 bin/*
 grader
 *.rlib
+**/target/**
 
