@@ -1,4 +1,5 @@
 use algs_std::io::*;
+// use algs_std::;
 /*
 MaxPairwiseProductNaive(A[1 : : :n]):
 product <- 0
@@ -67,12 +68,8 @@ fn main() -> std::io::Result<()> {
 
     let n = read_integer_n();
     let numbers = read_integer_seq(n as usize).unwrap(); 
-
-
-    let fin = max_pairwise_product_fast(&numbers);
-    println!("{}", fin);
-
-    // algs_std::test_eq!(max_pairwise_naive, max_pairwise_product_fast, &numbers);
-
+    algs_std::test_eq!("ahe", "hezvo");
+    // let fin = max_pairwise_product_fast(&numbers);
+    // println!("{}", fin);
     Ok(())
 }

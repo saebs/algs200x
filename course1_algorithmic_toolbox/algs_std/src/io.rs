@@ -31,6 +31,7 @@ pub fn read_integer_seq(max_elements: usize) -> std::io::Result<Vec<i64>> {
         .map(|n| n.parse::<i64>().unwrap())
         .take(max_elements)
         .collect();
-       Ok(seq) 
+    assert!(seq.len() == max_elements, "below the required number of integers");
+    Ok(seq) 
 
 }
