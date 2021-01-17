@@ -1,4 +1,4 @@
-use algs_std::io::*;
+use algs_std::*;
 // use algs_std::;
 /*
 MaxPairwiseProductNaive(A[1 : : :n]):
@@ -10,6 +10,7 @@ return product
 */
 
 // Fails when number not sorted.
+#[allow(dead_code)]
 fn max_pairwise_naive(numbers: &Vec<i64>) -> i64 {
     let n = numbers.len();
     let mut product: i64 = 0;
@@ -69,7 +70,7 @@ fn main() -> std::io::Result<()> {
     let n = read_integer_n();
     let numbers = read_integer_seq(n as usize).unwrap(); 
     algs_std::test_eq!("ahe", "hezvo");
-    // let fin = max_pairwise_product_fast(&numbers);
+    let fin = max_pairwise_product_fast(&numbers);
     // println!("{}", fin);
     Ok(())
 }

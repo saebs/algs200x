@@ -22,17 +22,38 @@
 // 1 1 1.5 5 2 5 3
 // Memory limit. 512 Mb.
 
-use algs_std::io::*;
+use algs_std::*;
 
 fn sum_of_two_digits(a: i64, b: i64) -> i64 {
     assert!(((0 <= a && b <= 9) && (0 <= b && a <= 9)), "oustide of constraints" );
     a + b 
 }
- 
+
+fn zombili(a: i64, b: i64) -> i64 {
+    assert!(((0 <= a && b <= 9) && (0 <= b && a <= 9)), "oustide of constraints" );
+    a + b 
+}
+
 fn main() -> std::io::Result<()> {
     let a = read_integer_n();
     let b = read_integer_n();
 
-    println!("{}", sum_of_two_digits(a, b));
+    // println!("{}", sum_of_two_digits(a, b));
+
+    // loop {
+    //     let nrand = 0;
+    //     println!("{}", nrand);
+    //     let mut numbers: Vec<i64> = Vec::new();
+    //     for i in 0..10 {
+    //     numbers.push( nrand + i); // replace this shit 
+    //     }
+    //     println!("{:?}", &numbers);
+    //     let correct = test_eq!(sum_of_two_digits(1,2), zombili( 1,2 ));
+    //     if !correct {
+    //     break ; 
+    //     }
+    // }
+    stress_test!(sum_of_two_digits, zombili, 3);
+
     Ok(())
 }
