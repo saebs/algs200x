@@ -79,6 +79,7 @@ macro_rules! stress_test {
             let seed: i64 = $s;
             println!("{}", seed);
             let mut numbers: Vec<i64> = Vec::new();
+            // let numbers = (0..=seed).map(|seed| seed + 1;).collect::<i64>();
             for i in 0..seed {
             numbers.push( seed + i); // replace this shit 
             }
