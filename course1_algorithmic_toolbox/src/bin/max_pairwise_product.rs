@@ -71,6 +71,6 @@ fn main() -> std::io::Result<()> {
     let numbers = read_integer_seq(n as usize).unwrap(); 
     algs_std::test_eq!("ahe", "hezvo");
     let fin = max_pairwise_product_fast(&numbers);
-    // println!("{}", fin);
+    println!("{}", fin);
     Ok(())
 }
