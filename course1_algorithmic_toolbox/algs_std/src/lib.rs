@@ -8,7 +8,9 @@ use std::io::{Error, ErrorKind};
 use std::io;
 use std::io::prelude::*;
 
+// extern crate rand;
 
+use rand::Rng;
 /// Input Formats:
 /// Read an Integer from Standard input / cli
 pub fn read_integer_n() ->  i64 {
@@ -74,18 +76,17 @@ macro_rules! test_eq {
 /// takes two identifiers of algorithms and a seed value
 #[macro_export]
 macro_rules! stress_test {
-    ($model:ident, $main:ident, $s:expr) => { // zero more tokens
+    ($model:ident, $main:ident, $n:expr, $m:expr) => { // zero more tokens
         loop {
-            let seed: i64 = $s;
-            println!("{}", seed);
+            let seed: i64 = rng::gen_range(2, $n); // generate random number |.| 2 and n
             let mut numbers: Vec<i64> = Vec::new();
             // let numbers = (0..=seed).map(|seed| seed + 1;).collect::<i64>();
             for i in 0..seed {
-            numbers.push( seed + i); // replace this shit 
+            numbers.push( rng::gen_range(0, $m)); // allocate random number between 0 and m 
             }
             println!("{:?}", &numbers);
-            let r1 = $model(seed, seed);
-            let r2 = $main(seed, seed);
+            let r1 = $model(&numbers);
+            let r2 = $main(&numbers);
             let correct = test_eq!(r1, r2);
             if !correct {
             break ; 
