@@ -53,7 +53,7 @@ fn main() -> std::io::Result<()> {
     //     break ; 
     //     }
     // }
-    stress_test!(sum_of_two_digits, zombili, 3);
+    // stress_test!(sum_of_two_digits, zombili, 3);
 
     Ok(())
 }
