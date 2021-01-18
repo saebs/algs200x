@@ -35,8 +35,8 @@ fn zombili(a: i64, b: i64) -> i64 {
 }
 
 fn main() -> std::io::Result<()> {
-    let _a = read_integer_n();
-    let _b = read_integer_n();
+    let _a: i64 = read_integer_n();
+    let _b: i64 = read_integer_n();
 
     // println!("{}", sum_of_two_digits(a, b));
 

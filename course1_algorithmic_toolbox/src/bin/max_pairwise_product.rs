@@ -1,5 +1,4 @@
 use algs_std::*;
-// use algs_std::;
 /*
 MaxPairwiseProductNaive(A[1 : : :n]):
 product <- 0
