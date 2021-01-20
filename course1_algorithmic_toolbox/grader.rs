@@ -13,8 +13,9 @@ use std::process::{Command, Stdio};
 use std::time::Instant;
 
 extern crate stress;
-// use std::fs;
 // use std::str::from_utf8;
+
+
 fn main() -> std::io::Result<()> {
     let args: Vec<String> = env::args().skip(1).collect();
     // println!("program to grade: {}", &args[0]);
@@ -43,12 +44,14 @@ fn main() -> std::io::Result<()> {
 
     // TODO Modularise The Benchmarking Code to re-use when test suites and PASS, FAIL logic implemented
 
-    // Solution Running Time Bechmark
+    /// Solution Running Time Bechmark
     //***********************************
     let now = Instant::now();
     let mut solution_child = Command::new("bin/./".to_owned() + &app).spawn().unwrap();
     let solution_process_id = solution_child.id().to_string();
     let elapsed = now.elapsed();
+    let goo = Instant::now();
+
 
     // Memory Used by process Benchmark
     // ***************************************************

@@ -74,3 +74,15 @@ fn main() -> std::io::Result<()> {
     Ok(())
 }
 
+
+
+#[cfg(test)]
+mod tests {
+    use algs_std;
+
+    #[test]
+    fn works_at_least() {
+        algs_std::test_eq!(max_pairwise_naive, max_pairwise_product_fast, 2, &vec![1]);
+    }
+
+}
