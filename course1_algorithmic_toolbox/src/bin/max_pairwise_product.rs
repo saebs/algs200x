@@ -78,7 +78,7 @@ fn main() -> std::io::Result<()> {
 
 #[cfg(test)]
 mod tests {
-    use algs_std;
+    use algs_std::{self, running_time};
     use crate::{max_pairwise_naive, max_pairwise_product_fast, test_eq};
 
 
@@ -87,6 +87,12 @@ mod tests {
         // let status = algs_std::test_eq!(max_pairwise_naive(&vec![1i64,2i64]), max_pairwise_product_fast( &vec![1i64, 2i64]));
         // Use this with custom test_eq! macro
         algs_std::stress_test!(max_pairwise_naive, max_pairwise_product_fast, 7i64, 10i64);
+    }
+
+    #[test]
+    fn max_pairwise_time () {
+       let d = algs_std::gen_seq_of_n!(6, 1000); 
+       algs_std::running_time!(1f64, max_pairwise_naive(&d));
     }
 
 }
