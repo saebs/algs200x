@@ -95,10 +95,11 @@ macro_rules! stress_test {
             println!("{:?}", &numbers);
             let r1 = $model(&numbers);
             let r2 = $main(&numbers);
-            if  test_eq!(r1, r2) {
-                break
-            }
-
+            let state = test_eq!(r1, r2);
+            if  !state {
+                break;
+                
+            };
         }
     };
 }

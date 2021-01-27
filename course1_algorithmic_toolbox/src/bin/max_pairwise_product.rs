@@ -86,7 +86,7 @@ mod tests {
     fn works_at_least() {
         // let status = algs_std::test_eq!(max_pairwise_naive(&vec![1i64,2i64]), max_pairwise_product_fast( &vec![1i64, 2i64]));
         // Use this with custom test_eq! macro
-        assert!(algs_std::stress_test!(max_pairwise_naive, max_pairwise_product_fast, 3i64, 5i64));
+        let f = algs_std::stress_test!(max_pairwise_naive, max_pairwise_product_fast, 3i64, 5i64);
         // assert!(status, "demo");
     }
 
