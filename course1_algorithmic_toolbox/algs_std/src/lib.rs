@@ -101,6 +101,7 @@ macro_rules! stress_test {
                 
             }
         }
+        assert!(false);
     };
 }
 
