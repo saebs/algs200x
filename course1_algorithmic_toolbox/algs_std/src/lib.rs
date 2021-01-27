@@ -99,7 +99,7 @@ macro_rules! stress_test {
             if  !state {
                 break;
                 
-            };
+            }
         }
     };
 }
