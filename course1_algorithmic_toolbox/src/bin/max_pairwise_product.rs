@@ -13,8 +13,8 @@ return product
 fn max_pairwise_naive(numbers: &Vec<i64>) -> i64 {
     let n = numbers.len();
     let mut product: i64 = 0;
-    for i in 1..n {
-        for j in i + 1..n {
+    for i in 0..n {
+        for j in (i + 1)..n {
             product = cmp::max(product, numbers[i as usize] * numbers[j as usize]);
         }
     }
@@ -83,11 +83,10 @@ mod tests {
 
 
     #[test]
-    fn works_at_least() {
+    fn max_pairwise() {
         // let status = algs_std::test_eq!(max_pairwise_naive(&vec![1i64,2i64]), max_pairwise_product_fast( &vec![1i64, 2i64]));
         // Use this with custom test_eq! macro
         algs_std::stress_test!(max_pairwise_naive, max_pairwise_product_fast, 7i64, 10i64);
-        assert!(false);
     }
 
 }
