@@ -79,10 +79,14 @@ fn main() -> std::io::Result<()> {
 #[cfg(test)]
 mod tests {
     use algs_std;
+    use crate::{max_pairwise_naive, max_pairwise_product_fast};
+
 
     #[test]
     fn works_at_least() {
-        algs_std::test_eq!(max_pairwise_naive, max_pairwise_product_fast, 2, &vec![1]);
+        let status = algs_std::test_eq!(max_pairwise_naive(&vec![1i64,2i64]), max_pairwise_product_fast( &vec![1i64, 2i64]));
+        // Use this with custom test_eq! macro
+        assert!(status, "demo");
     }
 
 }
