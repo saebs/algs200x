@@ -11,6 +11,15 @@ use std::iter::repeat_with;
 // pub extern crate fastrand;
 pub use fastrand;
 
+
+
+/// thumbs up
+pub const PASSMOJI: char =  '\u{1F44D}'; 
+/// thumbs down
+pub const FAILMOJI: char =  '\u{1F44E}';
+
+
+
 /// Input Formats:
 /// Read an Integer from Standard input / cli
 pub fn read_integer_n() ->  i64 {
@@ -43,17 +52,26 @@ pub fn read_integer_seq(max_elements: usize) -> std::io::Result<Vec<i64>> {
 ///Development tool:
 /// Use these as frameworks for your test suits and debugging activities
 /// Measures the Algorithm Running Time in seconds
+/// args: limit, solution call
 #[macro_export]
 macro_rules! running_time {
-    ($sol_n:ident($($n:expr),*)) => {
+    ($limit:expr,$sol_n:ident($($n:expr),*)) => {
        let moment = std::time::Instant::now(); 
-       $sol_n($($n),*)
+       $sol_n($($n),*);
        let time = moment.elapsed();
-       println!("Running Time: {:.3?}", &time.as_secs_f64());
-       time
+       println!("\nRunning Time: {:.3?}\n", &time.as_secs_f64());
+       if $limit as f64 >= time.as_secs_f64() {
+           println!("\n {} Pass\n", $crate::PASSMOJI);
+           assert!(true);
+       }
+       else {
+           println!("\n {} Fail\n", $crate::FAILMOJI);
+           assert!(false);
+       }
     };
     // consider options with limits or constraints
 }
+
 
 /// Development tool: Check equality
 /// Tests equality of two expressions 
@@ -64,10 +82,10 @@ macro_rules! running_time {
 macro_rules! test_eq {
     ($x:expr, $y:expr) => {
         if !($x == $y) {
-            println!("Wrong Answer!:  {:?}  {:?}", $x, $y);
+            println!("{} Wrong Answer!:  {:?}  {:?}", $crate::FAILMOJI,$x, $y );
             false 
         } else {
-            println!("Ok");
+            println!("{} Ok", $crate::PASSMOJI);
             true
         }
     };
