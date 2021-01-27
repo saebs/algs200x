@@ -7,10 +7,10 @@
 use std::io::{Error, ErrorKind};
 use std::io;
 use std::io::prelude::*;
+use std::iter::repeat_with;
+// pub extern crate fastrand;
+pub use fastrand;
 
-// extern crate rand;
-
-use rand::Rng;
 /// Input Formats:
 /// Read an Integer from Standard input / cli
 pub fn read_integer_n() ->  i64 {
@@ -73,41 +73,35 @@ macro_rules! test_eq {
     };
 }
 
+#[macro_export]
+/// Test generator with constraints n and m
+macro_rules! gen_seq_of_n  {
+    ($n:expr,$m:expr) => {{ 
+        let r = $crate::fastrand::i64(2..$n);
+        let seq: Vec<i64> = std::iter::repeat_with(|| $crate::fastrand::i64(2..$n)).take(r as usize).collect();
+        seq
+    }};
+}
+
+
+
 /// takes two identifiers of algorithms and a seed value
 #[macro_export]
 macro_rules! stress_test {
     ($model:ident, $main:ident, $n:expr, $m:expr) => { // zero more tokens
+
         loop {
-            let seed: i64 = rng::gen_range(2, $n); // generate random number |.| 2 and n
-            let mut numbers: Vec<i64> = Vec::new();
-            // let numbers = (0..=seed).map(|seed| seed + 1;).collect::<i64>();
-            for i in 0..seed {
-            numbers.push( rng::gen_range(0, $m)); // allocate random number between 0 and m 
-            }
+            let numbers = $crate::gen_seq_of_n!($n, $m);
             println!("{:?}", &numbers);
             let r1 = $model(&numbers);
             let r2 = $main(&numbers);
-            let correct = test_eq!(r1, r2);
-            if !correct {
-            break ; 
+            if  test_eq!(r1, r2) {
+                break
             }
+
         }
     };
 }
 
 
     
-/*loop {
-        let nrand = 0;
-        println!("{}", nrand);
-        let mut numbers: Vec<i64> = Vec::new();
-        for i in 0..10 {
-        numbers.push( nrand + i); // replace this shit 
-        }
-        println!("{:?}", &numbers);
-        let correct = test_eq!(sum_of_two_digits(1,2), zombili( 1,2 ));
-        if !correct {
-        break ; 
-        }
-    }
-    */
