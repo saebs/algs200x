@@ -1,5 +1,7 @@
 //! The course "Standard" library customised for this course.
-//! Provides useful components for common Programming challenges as well as external tools
+//! - Provides reusable components for common programming challenges tasks,such as getting input
+//! - helpers tools for debugging / enforcing constraints  or semantics
+//! - Test generators ..
 #![crate_type="lib"]
 #![crate_name="algs_std"]
 #![warn(missing_docs, missing_debug_implementations, rust_2018_idioms)]
@@ -10,16 +12,18 @@ use std::io::prelude::*;
 use std::iter::repeat_with;
 pub use fastrand;
 
+// thumbs up
 // pub const PASSMOJI: char =  '\u{1F44D}'; 
-/// Pass Mark
-pub const PASSMOJI: char = '\u{1F197}';
+// thumbs down
 // pub const FAILMOJI: char =  '\u{1F44E}';
-/// Fail Mark
+
+/// Ok button
+pub const PASSMOJI: char = '\u{1F197}';
+/// Red X
 pub const FAILMOJI: char =  '\u{274C}';
 
-
-/// Input Formats:
-/// Read an Integer from Standard input / cli
+/// Input Format:
+/// From Standard input / cli
 pub fn read_integer_n() ->  i64 {
     let stdin = io::stdin();
     loop {
@@ -33,7 +37,8 @@ pub fn read_integer_n() ->  i64 {
     }
 }
 
-/// Sequence of `n` integers from Standard Input /cli
+/// Input format:
+/// Sequence of  upto `n` integers from Standard Input
 pub fn read_integer_seq(max_elements: usize) -> std::io::Result<Vec<i64>> {
     // collect into vec i64 upto max_elements
     let mut buffer = String::with_capacity(max_elements);
@@ -47,10 +52,8 @@ pub fn read_integer_seq(max_elements: usize) -> std::io::Result<Vec<i64>> {
 
 }
 
-///Development tool:
-/// Use these as frameworks for your test suits and debugging activities
-/// Measures the Algorithm Running Time in seconds
-/// args: limit, solution call
+/// Benchmark tool:
+/// Set Algorithm expected time limit
 #[macro_export]
 macro_rules! running_time {
     ($limit:expr,$sol_n:ident($($n:expr),*)) => {
@@ -73,11 +76,8 @@ macro_rules! running_time {
 }
 
 
-/// Development tool: Check equality
-/// Tests equality of two expressions 
-/// returns a boolean. specialy design to be used in stress test loop 
-/// correct but naive solution vs fast implementation
-/// component ideally used for stress testing
+
+/// Compare correct but naive solution against fast(er) solution 
 #[macro_export]
 macro_rules! test_eq {
     ($x:expr, $y:expr) => {
@@ -93,7 +93,7 @@ macro_rules! test_eq {
 
 #[macro_export]
 /// Generic Test generator 
-/// Numbers, Sequences of Numbers
+/// One Number, Sequences of Numbers
 macro_rules! test_gen  {
     ($n:expr,$m:expr) => {{ 
         let r = $crate::fastrand::i64(2..$n);
@@ -107,8 +107,8 @@ macro_rules! test_gen  {
 }
 
 
-
-/// takes two identifiers of algorithms and a seed value
+/// Rigourous Randomized equality tests 
+/// Comparing a Model solution against Fast(er) implementation,  
 #[macro_export]
 macro_rules! stress_test {
     // Sequence Of Numbers
