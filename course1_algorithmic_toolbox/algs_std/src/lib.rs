@@ -105,13 +105,30 @@ macro_rules! test_gen  {
 /// takes two identifiers of algorithms and a seed value
 #[macro_export]
 macro_rules! stress_test {
-    ($model:ident, $main:ident, $n:expr, $m:expr) => { // zero more tokens
+    // Sequence Of Numbers
+    ($model:ident, $main:ident, $n:expr, $m:expr) => { 
 
         loop {
             let numbers = $crate::test_gen!($n, $m);
             println!("{:?}", &numbers);
             let r1 = $model(&numbers);
             let r2 = $main(&numbers);
+            let state = test_eq!(r1, r2);
+            if  !state {
+                break;
+                
+            }
+        }
+        assert!(false);
+    };
+    // One Number
+    ($model:ident, $main:ident, $n:expr) => { 
+
+        loop {
+            let number = $crate::test_gen!($n);
+            println!("{:?}", number);
+            let r1 = $model(number);
+            let r2 = $main(number);
             let state = test_eq!(r1, r2);
             if  !state {
                 break;
