@@ -10,3 +10,5 @@ edition = "2018"
 fastrand = "1.4.0"
 [target.'cfg(not(target_env = "msvc"))'.dependencies]
 jemallocator = "0.3.2"
+
+jemalloc-ctl = "0.3.3"

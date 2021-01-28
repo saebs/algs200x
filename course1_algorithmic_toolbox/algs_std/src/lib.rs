@@ -27,6 +27,9 @@ use std::io;
 use std::io::prelude::*;
 use std::iter::repeat_with;
 pub use fastrand;
+use jemallocator;
+use jemalloc_ctl::{stats, epoch};
+
 
 // thumbs up
 // pub const PASSMOJI: char =  '\u{1F44D}'; 
