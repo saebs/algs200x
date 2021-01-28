@@ -10,10 +10,13 @@ use std::io::prelude::*;
 use std::iter::repeat_with;
 pub use fastrand;
 
-/// thumbs up
-pub const PASSMOJI: char =  '\u{1F44D}'; 
-/// thumbs down
-pub const FAILMOJI: char =  '\u{1F44E}';
+// pub const PASSMOJI: char =  '\u{1F44D}'; 
+/// Pass Mark
+pub const PASSMOJI: char = '\u{1F197}';
+// pub const FAILMOJI: char =  '\u{1F44E}';
+/// Fail Mark
+pub const FAILMOJI: char =  '\u{274C}';
+
 
 /// Input Formats:
 /// Read an Integer from Standard input / cli
@@ -54,14 +57,17 @@ macro_rules! running_time {
        let moment = std::time::Instant::now(); 
        $sol_n($($n),*);
        let time = moment.elapsed();
-       println!("\n\n{}\nRunning Time: {:.3?}", std::stringify!($sol_n) ,&time.as_secs_f64());
-       if $limit as f64 >= time.as_secs_f64() {
+       let time = time.as_secs_f64();
+       println!("\n\n{}\nRunning Time: {:.2?}s", std::stringify!($sol_n) ,&time);
+       if $limit as f64 >= time {
            println!("{} Pass", $crate::PASSMOJI);
-           assert!(true);
+           time
+        //    assert!(true);
        }
        else {
            println!("{} Fail", $crate::FAILMOJI);
-           assert!(false);
+           time
+        //    assert!(false);
        }
     };
 }
@@ -79,7 +85,7 @@ macro_rules! test_eq {
             println!("{} Wrong Answer!:  {:?} <> {:?}\n", $crate::FAILMOJI,$x, $y );
             false 
         } else {
-            println!("{} Ok\n", $crate::PASSMOJI);
+            println!("{}\n", $crate::PASSMOJI);
             true
         }
     };
@@ -119,7 +125,7 @@ macro_rules! stress_test {
                 
             }
         }
-        assert!(false);
+        // assert!(false);
     };
     // One Number
     ($model:ident, $main:ident, $n:expr) => { 
@@ -135,7 +141,7 @@ macro_rules! stress_test {
                 
             }
         }
-        assert!(false);
+        // assert!(false);
     };
 }
 
