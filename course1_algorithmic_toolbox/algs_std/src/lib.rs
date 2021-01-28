@@ -164,13 +164,20 @@ macro_rules! stress_test {
     };
 }
 
-// Todo , Memory Tests
-// Going to attempt the Archimedes' Method
-// Basically:
-// 1. Measure current memory usage
-// 2. Drop the Data Structure
-// 3. Measure Current Memory Usage again
-// using jemalloc crate
-
-
+/// Profile Algorithm Consumption
+/// Uses the Archimedes' Method
+#[macro_export]
+macro_rules! memory_used {
+   ($alg:ident($($x:expr),*)) => {
+        {
+            // let e = $crate::epoch::mib::unwrap(); 
+            let allocated1 = $crate::stat::allocated::mib.unwrap();
+            $alg($($x),*);
+            // drop above item?? how when its done. its been realeased by Rust me thinks
+            let allocated2 = $crate::stat::allocated::mib.unwrap()
+            let bytes = mem2 -mem1;
+            bytes 
+        }
+   }; 
+}
     
