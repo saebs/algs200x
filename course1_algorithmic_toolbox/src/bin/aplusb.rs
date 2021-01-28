@@ -40,20 +40,7 @@ fn main() -> std::io::Result<()> {
 
     // println!("{}", sum_of_two_digits(a, b));
 
-    // loop {
-    //     let nrand = 0;
-    //     println!("{}", nrand);
-    //     let mut numbers: Vec<i64> = Vec::new();
-    //     for i in 0..10 {
-    //     numbers.push( nrand + i); // replace this shit 
-    //     }
-    //     println!("{:?}", &numbers);
-    //     let correct = test_eq!(sum_of_two_digits(1,2), zombili( 1,2 ));
-    //     if !correct {
-    //     break ; 
-    //     }
-    // }
-    // stress_test!(sum_of_two_digits, zombili, 3);
+    test_eq!(sum_of_two_digits(3, 4), zombili(3,4));
 
     Ok(())
 }

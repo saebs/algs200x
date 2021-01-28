@@ -8,17 +8,12 @@ use std::io::{Error, ErrorKind};
 use std::io;
 use std::io::prelude::*;
 use std::iter::repeat_with;
-// pub extern crate fastrand;
 pub use fastrand;
-
-
 
 /// thumbs up
 pub const PASSMOJI: char =  '\u{1F44D}'; 
 /// thumbs down
 pub const FAILMOJI: char =  '\u{1F44E}';
-
-
 
 /// Input Formats:
 /// Read an Integer from Standard input / cli
@@ -35,7 +30,7 @@ pub fn read_integer_n() ->  i64 {
     }
 }
 
-/// Read A sequence of `n` integers from Standard Input /cli
+/// Sequence of `n` integers from Standard Input /cli
 pub fn read_integer_seq(max_elements: usize) -> std::io::Result<Vec<i64>> {
     // collect into vec i64 upto max_elements
     let mut buffer = String::with_capacity(max_elements);
@@ -59,17 +54,16 @@ macro_rules! running_time {
        let moment = std::time::Instant::now(); 
        $sol_n($($n),*);
        let time = moment.elapsed();
-       println!("\nRunning Time: {:.3?}\n", &time.as_secs_f64());
+       println!("\n\n{}\nRunning Time: {:.3?}", std::stringify!($sol_n) ,&time.as_secs_f64());
        if $limit as f64 >= time.as_secs_f64() {
-           println!("\n {} Pass\n", $crate::PASSMOJI);
+           println!("{} Pass", $crate::PASSMOJI);
            assert!(true);
        }
        else {
-           println!("\n {} Fail\n", $crate::FAILMOJI);
+           println!("{} Fail", $crate::FAILMOJI);
            assert!(false);
        }
     };
-    // consider options with limits or constraints
 }
 
 
@@ -82,22 +76,27 @@ macro_rules! running_time {
 macro_rules! test_eq {
     ($x:expr, $y:expr) => {
         if !($x == $y) {
-            println!("{} Wrong Answer!:  {:?}  {:?}", $crate::FAILMOJI,$x, $y );
+            println!("{} Wrong Answer!:  {:?} <> {:?}\n", $crate::FAILMOJI,$x, $y );
             false 
         } else {
-            println!("{} Ok", $crate::PASSMOJI);
+            println!("{} Ok\n", $crate::PASSMOJI);
             true
         }
     };
 }
 
 #[macro_export]
-/// Test generator with constraints n and m
-macro_rules! gen_seq_of_n  {
+/// Generic Test generator 
+/// Numbers, Sequences of Numbers
+macro_rules! test_gen  {
     ($n:expr,$m:expr) => {{ 
         let r = $crate::fastrand::i64(2..$n);
         let seq: Vec<i64> = std::iter::repeat_with(|| $crate::fastrand::i64(2..$n)).take(r as usize).collect();
         seq
+    }};
+    ($n:expr) => {{ 
+        let n = $crate::fastrand::i64(2..$n);
+        n
     }};
 }
 
@@ -109,7 +108,7 @@ macro_rules! stress_test {
     ($model:ident, $main:ident, $n:expr, $m:expr) => { // zero more tokens
 
         loop {
-            let numbers = $crate::gen_seq_of_n!($n, $m);
+            let numbers = $crate::test_gen!($n, $m);
             println!("{:?}", &numbers);
             let r1 = $model(&numbers);
             let r2 = $main(&numbers);
@@ -122,6 +121,9 @@ macro_rules! stress_test {
         assert!(false);
     };
 }
+
+// Todo , Memory Tests ?????
+
 
 
     
