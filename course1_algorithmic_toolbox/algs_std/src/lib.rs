@@ -8,12 +8,20 @@
 //! - Test generators ..
 //! - Algorithm Runtime Test
 //! - Algorithm / Expression Equality Test
-//! - [TODO] Memory Use tests
+//! - TODO: Memory Use tests
 
 #![crate_type="lib"]
 #![crate_name="algs_std"]
 #![warn(missing_docs, missing_debug_implementations, rust_2018_idioms)]
 #![allow(unused_imports)]
+
+#[cfg(not(target_env = "msvc"))]
+use jemallocator::Jemalloc;
+
+#[cfg(not(target_env = "msvc"))]
+#[global_allocator]
+static GLOBAL: Jemalloc = Jemalloc;
+
 use std::io::{Error, ErrorKind};
 use std::io;
 use std::io::prelude::*;
@@ -153,8 +161,13 @@ macro_rules! stress_test {
     };
 }
 
-// Todo , Memory Tests ?????
-
+// Todo , Memory Tests
+// Going to attempt the Archimedes' Method
+// Basically:
+// 1. Measure current memory usage
+// 2. Drop the Data Structure
+// 3. Measure Current Memory Usage again
+// using jemalloc crate
 
 
     
