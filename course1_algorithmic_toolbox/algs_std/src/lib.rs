@@ -1,7 +1,15 @@
-//! The course "Standard" library customised for this course.
-//! - Provides reusable components for common programming challenges tasks,such as getting input
-//! - helpers tools for debugging / enforcing constraints  or semantics
+//! A Standard library for Programming Challenges.
+//! The primary purpose is to provide reusable starter components  to aid 
+//! learner to focus on the Solution Space/Problem at hand instead of routine tasks
+//! Supports; 
+//! - Command Line Input Formats 
+//! - Basic Visual (read Emojical) debugging/tests
+//! - Stress test
 //! - Test generators ..
+//! - Algorithm Runtime Test
+//! - Algorithm / Expression Equality Test
+//! - [TODO] Memory Use tests
+
 #![crate_type="lib"]
 #![crate_name="algs_std"]
 #![warn(missing_docs, missing_debug_implementations, rust_2018_idioms)]
