@@ -15,20 +15,18 @@
 #![warn(missing_docs, missing_debug_implementations, rust_2018_idioms)]
 #![allow(unused_imports)]
 
-#[cfg(not(target_env = "msvc"))]
-use jemallocator::Jemalloc;
-
+/// Global Profiler
 #[cfg(not(target_env = "msvc"))]
 #[global_allocator]
-static GLOBAL: Jemalloc = Jemalloc;
+pub static ALLOC: jemallocator::Jemalloc = jemallocator::Jemalloc;
 
 use std::io::{Error, ErrorKind};
 use std::io;
 use std::io::prelude::*;
 use std::iter::repeat_with;
 pub use fastrand;
-use jemallocator;
-use jemalloc_ctl::{stats, epoch};
+pub use jemallocator;
+pub use jemalloc_ctl::{stats, epoch,epoch_mib};
 
 
 // thumbs up
@@ -41,6 +39,10 @@ pub const PASSMOJI: char = '\u{1F197}';
 /// Red X
 pub const FAILMOJI: char =  '\u{274C}';
 
+/// One Megabyte
+pub const MB: usize = 1024; 
+/// 512MB memory 
+pub const MEM512MB: usize = 524288;
 /// Input Format:
 /// From Standard input / cli
 pub fn read_integer_n() ->  i64 {
@@ -164,20 +166,72 @@ macro_rules! stress_test {
     };
 }
 
-/// Profile Algorithm Consumption
-/// Uses the Archimedes' Method
+/// Measure Memory Consumption
+/// Using Archimedes' Method
 #[macro_export]
-macro_rules! memory_used {
-   ($alg:ident($($x:expr),*)) => {
-        {
-            // let e = $crate::epoch::mib::unwrap(); 
-            let allocated1 = $crate::stat::allocated::mib.unwrap();
-            $alg($($x),*);
-            // drop above item?? how when its done. its been realeased by Rust me thinks
-            let allocated2 = $crate::stat::allocated::mib.unwrap()
-            let bytes = mem2 -mem1;
-            bytes 
-        }
+macro_rules! size_of_custom_type {
+   ($alg:ty) => {
+            let e = $crate::epoch::mib().unwrap(); 
+            let allocated = $crate::stats::allocated::mib().unwrap();
+            let before = allocated.read().unwrap();
+            $alg;
+            e.advance().unwrap();
+            let after = allocated.read().unwrap();
+            eprintln!("before: {} after: {} ", before, after);
+            let megabytes = (after - before)/$crate::MB;
+            println!("{}MB", &megabytes);
+            megabytes
    }; 
 }
+
+// /// Measure Memory Consumption
+// /// Using Archimedes' Method
+// #[derive(Debug, Default)]
+// /// Memory analyzer, Abstration over Jemalloc
+// /// Allows to set time limits for Problem as well
+// pub struct Memory {
+//     /// First Memory Allocation Measurement
+//     before: usize,
+//     /// Second Memory Allocation Measurement
+//     after: usize,
+//     /// a stub
+//     pub _stub: (),
+// }
+
+// impl Memory {
+//         /// Memory Measurement Instance
+//         pub fn new() -> Self {
+//             Memory::default()
+//         }
+
+//         /// Begin Analysis
+//         pub fn begin<F>(&mut self, mut _funky: F)
+//             where F: FnMut() 
+//         {
+//             epoch::mib().unwrap(); 
+//             let allocated = stats::allocated::mib().unwrap();
+//             let before = allocated.read().unwrap();
+//             self.before = before;
+//         }
+//         /// End Analysis
+//         pub fn end<F>(&mut self, mut _funky: F)
+//             where F: FnMut() 
+//         {
+//             epoch::mib().unwrap().advance().unwrap();
+//             let after = stats::allocated::mib().unwrap();
+//             self.after = after.read().unwrap();
+//         }
+
+//         /// Allocated or Consumed Between Start and End of Analysis
+//         pub fn usage(&self) -> usize {
+//             let bytes = self.after - self.before;
+//             println!("{}Bytes", &bytes);
+//             bytes
+//         }
+//     }
+
+    /// Tests Specified Problem Boundary
+    pub fn is_within_limit< M: PartialEq + PartialOrd>(item: M, limit: M) -> bool {
+            item <= limit 
+    }
     

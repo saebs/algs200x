@@ -93,4 +93,16 @@ mod tests {
        running_time!(1f64, max_pairwise_naive(&d));
     }
 
+    #[test]
+    fn mem_used() {
+    //    let d = algs_std::test_gen!(10, 10000000000000000000000000000000000007); 
+    //     memory_used!(max_pairwise_naive(&d));
+        let mut foo = algs_std::Memory::new();
+            foo.begin();
+            let _itsho = vec![100000000; 10000000];
+            foo.end();
+        print!("Memory used: {}", foo.usage() );
+        
+    }
+
 }
